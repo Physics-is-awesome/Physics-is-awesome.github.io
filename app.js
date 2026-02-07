@@ -12,11 +12,25 @@ function taskId(category, text) {
   return `${category}::${text.trim()}`;
 }
 
+
 async function main() {
-  const response = await fetch("schedule.json");
-  const data = await response.json();
-  const data = raw.nil;
-  
+  console.log("App starting");
+
+  const response = await fetch("data/tasks.json");
+  const raw = await response.json();
+
+  console.log("RAW JSON:", raw);
+
+  // ✅ THIS is the array you must iterate over
+  const data = Object.values(raw).flat();
+
+  console.log("NORMALIZED DATA:", data);
+  console.log("Is array?", Array.isArray(data));
+
+  if (!Array.isArray(data)) {
+    throw new Error("Normalized data is not an array");
+  }
+
   const state = loadState();
   const app = document.getElementById("app");
 
@@ -29,7 +43,8 @@ async function main() {
     section.appendChild(header);
 
     items.forEach(text => {
-      const id = taskId(category, text);
+      const cleanText = text.trim();
+      const id = taskId(category, cleanText);
       const checked = !!state[id];
 
       const div = document.createElement("div");
@@ -46,7 +61,7 @@ async function main() {
       });
 
       const label = document.createElement("label");
-      label.textContent = text.trim();
+      label.textContent = cleanText;
 
       div.appendChild(checkbox);
       div.appendChild(label);
@@ -58,3 +73,4 @@ async function main() {
 }
 
 main();
+
