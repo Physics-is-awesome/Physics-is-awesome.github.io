@@ -16,14 +16,18 @@ function taskId(category, text) {
 async function main() {
   console.log("App starting");
 
-  const response = await fetch("data/tasks.json");
+  const response = await fetch("schedule.json");
   const raw = await response.json();
 
   console.log("RAW JSON:", raw);
 
   // ✅ THIS is the array you must iterate over
   const data = Object.values(raw).flat();
-
+  const categories = Object.values(raw).flat();
+  
+  if (!Array.isArray(categories)) {
+    throw new Error("Expected categories to be an array");
+  }
   console.log("NORMALIZED DATA:", data);
   console.log("Is array?", Array.isArray(data));
 
