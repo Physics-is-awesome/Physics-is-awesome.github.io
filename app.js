@@ -9,13 +9,14 @@ function saveState(state) {
 }
 
 function taskId(category, text) {
-  return `${category}::${text}`;
+  return `${category}::${text.trim()}`;
 }
 
 async function main() {
   const response = await fetch("schedule.json");
   const data = await response.json();
-
+  const data = raw.nil;
+  
   const state = loadState();
   const app = document.getElementById("app");
 
@@ -45,7 +46,7 @@ async function main() {
       });
 
       const label = document.createElement("label");
-      label.textContent = text;
+      label.textContent = text.trim();
 
       div.appendChild(checkbox);
       div.appendChild(label);
