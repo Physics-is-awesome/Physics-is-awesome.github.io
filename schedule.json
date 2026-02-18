@@ -38,6 +38,21 @@
           "Contact Geometry\n",
           "Cateory theory\n"
       ]
+    },
+    {
+      "category": "Projects",
+      "items": [
+          "Axiom\n",
+          "Omega-X\n",
+          "Bracket System\n",
+          "Categoric-Metricplectic theory\n"
+      ]
+    },
+    {
+      "category": "Omega-X",
+      "items": [
+          "Develop Task List"
+      ]
     }
   ]
 }
