@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}{{ title }} — Alex Cason{% endblock %}
+{% block description %}{{ description or title }}{% endblock %}
+{% block content %}
+  <div class="wrap">
+    <div class="page-head">
+      <p class="eyebrow">{{ eyebrow }}</p>
+      <h1>{{ title }}</h1>
+    </div>
+
+    <div class="note-body">
+      {{ body_html | safe }}
+    </div>
+
+    {% if show_contact %}
+    <section class="section-gap">
+      <h2 style="font-size:1.1rem;">Contact</h2>
+      <div id="contact-container"></div>
+    </section>
+    {% endif %}
+  </div>
+{% endblock %}

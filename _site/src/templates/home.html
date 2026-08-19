@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}Alex Cason — Physics · Mathematical Physics · Computational Physics{% endblock %}
+{% block description %}Alex Cason, undergraduate physics student at the University of Tennessee, Knoxville.{% endblock %}
+{% block content %}
+  <div class="wrap hero">
+    <p class="eyebrow">Undergraduate Physics — University of Tennessee, Knoxville</p>
+    <h1>Alex Cason</h1>
+    <p class="tagline">Physics · Mathematical Physics · Computational Physics</p>
+
+    <p class="lede">
+      I'm an undergraduate physics student at the University of Tennessee,
+      Knoxville. My interests are in mathematical and computational
+      physics — particularly Hamiltonian mechanics, structure-preserving
+      numerical methods, and plasma physics. This site collects notes,
+      code, and the occasional video as I work through them:
+      <a href="research.html">research interests</a>,
+      <a href="projects.html">projects</a>,
+      <a href="notes.html">notes</a>, and
+      <a href="youtube.html">videos</a>.
+    </p>
+
+    <div class="phase-portrait" aria-hidden="false">
+      <svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schematic phase portrait of a simple pendulum, showing closed orbits, a separatrix, and open rotation curves">
+        <line class="axis" x1="20" y1="130" x2="680" y2="130"/>
+        <line class="axis" x1="350" y1="16" x2="350" y2="244"/>
+        <text class="axis-label" x="662" y="124">q</text>
+        <text class="axis-label" x="356" y="26">p</text>
+
+        <!-- rotation regime (open curves) -->
+        <path class="rotation" d="M0,10 Q35,3 70,10 T140,10 T210,10 T280,10 T350,10 T420,10 T490,10 T560,10 T630,10 T700,10"/>
+        <path class="rotation" d="M0,250 Q35,257 70,250 T140,250 T210,250 T280,250 T350,250 T420,250 T490,250 T560,250 T630,250 T700,250"/>
+
+        <!-- separatrix -->
+        <path class="separatrix" d="M40,130 C150,26 550,26 660,130"/>
+        <path class="separatrix" d="M40,130 C150,234 550,234 660,130"/>
+
+        <!-- libration orbits -->
+        <ellipse class="orbit" cx="350" cy="130" rx="170" ry="80"/>
+        <path id="orbit-mid-path" class="orbit orbit--mid" d="M 465,130 A 115,54 0 1 1 235,130 A 115,54 0 1 1 465,130 Z"/>
+        <ellipse class="orbit" cx="350" cy="130" rx="55" ry="26"/>
+
+        <!-- fixed points -->
+        <circle class="fixed-point" cx="350" cy="130" r="3.4"/>
+        <circle class="fixed-point--unstable" cx="40" cy="130" r="3.6"/>
+        <circle class="fixed-point--unstable" cx="660" cy="130" r="3.6"/>
+
+        <!-- traced trajectory -->
+        <circle class="phase-dot" r="4.5" cx="465" cy="130">
+          <animateMotion dur="9s" repeatCount="indefinite" begin="indefinite" rotate="0">
+            <mpath href="#orbit-mid-path" xlink:href="#orbit-mid-path"/>
+          </animateMotion>
+        </circle>
+      </svg>
+      <p class="caption">fig. — phase portrait of a simple pendulum (q, p), schematic · closed curves: libration · dashed: separatrix · open curves: rotation</p>
+    </div>
+
+    <nav class="tile-row" aria-label="Sections">
+      <a class="tile" href="research.html">
+        <span class="tile-label">Research <span class="arrow">→</span></span>
+        <span class="tile-sub">Interests & mathematical framing</span>
+      </a>
+      <a class="tile" href="projects.html">
+        <span class="tile-label">Projects <span class="arrow">→</span></span>
+        <span class="tile-sub">Code, tools, and ongoing work</span>
+      </a>
+      <a class="tile" href="notes.html">
+        <span class="tile-label">Notes <span class="arrow">→</span></span>
+        <span class="tile-sub">Derivations & working knowledge base</span>
+      </a>
+      <a class="tile" href="youtube.html">
+        <span class="tile-label">YouTube <span class="arrow">→</span></span>
+        <span class="tile-sub">Physics explained visually</span>
+      </a>
+    </nav>
+  </div>
+{% endblock %}

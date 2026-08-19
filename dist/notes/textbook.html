@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Textbook — Alex Cason</title>
+<meta name="description" content="">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f4f5f1'/%3E%3Cellipse cx='16' cy='16' rx='11' ry='6' fill='none' stroke='%233b4c8c' stroke-width='1.6'/%3E%3Ccircle cx='27' cy='16' r='2.1' fill='%233b4c8c'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="../index.html" class="site-id">Alex Cason<span class="dot">.</span></a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="../index.html">Home</a>
+      <a href="../research.html">Research</a>
+      <a href="../projects.html">Projects</a>
+      <a href="../notes.html" aria-current="page">Notes</a>
+      <a href="../youtube.html">YouTube</a>
+      <a href="../about.html">About</a>
+      <a href="../cv.html">CV</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="note-header">
+      <p class="breadcrumb"><a href="../notes.html">← Notes</a></p>
+      <h1>Textbook</h1>
+      <div class="note-meta">
+      </div>
+    </div>
+
+    <article class="note-body">
+      <h1 id="physics">Physics</h1>
+<h2 id="introduction">Introduction</h2>
+<p>Here I will write my notes related to physics</p>
+<h2 id="theoretical-physics-by-georg-joos">Theoretical Physics by Georg
+Joos</h2>
+<p>The vector analysis portion is intresting due to the fact that it
+takes something as simple as vector analysis and brings rigorous ideas
+to it like that <span class="math inline">\(\oint ds=0\)</span> for
+close surfaces.</p>
+<p>I also never really thought about using vector analysis instead of
+tensors.</p>
+<p>The rest of curl, gauss, and such is very simple. Though, now it is
+getting into tensors though vectors. <span
+class="math display">\[dv_x=ds\nabla v_x\]</span> <span
+class="math display">\[dv_y=ds\nabla v_y\]</span> <span
+class="math display">\[dv_z=ds\nabla v_z\]</span></p>
+<p>So therefore <span class="math inline">\(dv=ds \nabla v\)</span></p>
+<p>To calculate v, three vectors or nine scaler must be known.</p>
+<p>Another interesting addition is the fact that in physics, symmetric
+tensors can be represented as a surface to the second degree.</p>
+<p>One thing I have noticed is I need a more intuitive grasp into the
+relationships between curl, div, laplance, and grad. They use it a lot
+to simplify the calculations. <span class="math display">\[\nabla^2 f =
+\nabla \cdot (\nabla f)\]</span> The Laplace operator is equal to the
+divergence of the gradient. <span class="math display">\[\nabla \times
+(\nabla f) = 0\]</span> For smooth scaler fields. The curl of the
+gradient is zero. <span class="math display">\[\nabla \cdot (\nabla
+\times \mathbf{F}) = 0\]</span> The same is true for the divergence of
+the curl. <span class="math inline">\(\nabla^2 \mathbf{F} =
+\nabla(\nabla \cdot \mathbf{F}) - \nabla \times (\nabla \times
+\mathbf{F})\)</span> For vector fields, the Laplace operator has
+different relations.<br />
+</p>
+<p>Next, onto calculus of variations. I will derive Euler-Lagrange
+differential equation.</p>
+<p>Let: <span class="math inline">\(\tilde{y}\)</span> be a neighboring
+function to <span class="math inline">\(y\)</span>. Where <span
+class="math inline">\(\in\)</span> be a small quantity and <span
+class="math inline">\(\eta(x)\)</span> be a arbitrary function of x. so
+if <span class="math inline">\(\tilde{y}=y+\epsilon \eta\)</span> then
+<span class="math inline">\(\tilde{y&#39;}=y&#39;+ \epsilon
+\eta&#39;\)</span>. Here we stipulate that the two functions <span
+class="math inline">\(\tilde{y}\)</span> and <span
+class="math inline">\(y\)</span> converge at the beginning and end.
+Thus, <span class="math inline">\(\eta\)</span> must vanish at the ends.
+So if we substitute an integral <span class="math inline">\(I\)</span>,,
+we find that it becomes a function of <span
+class="math inline">\(\epsilon\)</span>. Then we require that <span
+class="math inline">\(I(\epsilon)\)</span> must have an extreme value of
+<span class="math inline">\(\epsilon=0\)</span>. Here it is in
+mathematical terms: <span
+class="math display">\[I(\epsilon)=\int^{x_1}_{x_0}F(x,y+\epsilon \eta,
+y&#39;+\epsilon\eta&#39;)dx=extremum \ for \ \epsilon=0\]</span></p>
+<p>This gives us a simple way of determining the extreme value for a
+given integral. The condition is: <span
+class="math display">\[(\frac{dI}{D\epsilon})_{\epsilon=0}=0\]</span></p>
+<p>We can then expand the integrad function <span
+class="math inline">\(F\)</span> in Taylor’s series, according to the
+powers of <span class="math inline">\(\epsilon\)</span>.</p>
+<p>The differentiate with respect to <span
+class="math inline">\(\epsilon\)</span>.</p>
+<p>This expression then vanishes for <span
+class="math inline">\(\epsilon=0\)</span>. Thus then simply remains the
+condition for the extremum.</p>
+<p>Integrate this to get the Euler-Lagrange differential equation: <span
+class="math display">\[\frac{d}{dx}\frac{\partial F(x, y,
+y&#39;)}{\partial y&#39;}-\frac{\partial F(x, y, y&#39;)}{\partial
+y}=0\]</span><br />
+</p>
+<p>For writing constraining forces, we find it to be <span
+class="math display">\[Z=\lambda \ grad \ G\]</span></p>
+<p>Where <span class="math inline">\(G(x,y,z)\)</span> is the equation
+of the surface<br />
+</p>
+<h2 id="on-sympathetic-reduction-in-classical-mechanics">On Sympathetic
+Reduction in Classical Mechanics</h2>
+<h2
+id="magnetic-fields-and-magnetic-diagnostics-for-tokamak-plasmas-by-alan-wooton">Magnetic
+Fields and Magnetic Diagnostics for Tokamak Plasmas by Alan Wooton</h2>
+<h2
+id="advanced-mhd-with-applications-to-laboratory-and-astrophysical-plasmas-by-cambridge">Advanced
+MHD with Applications to Laboratory and Astrophysical Plasmas by
+Cambridge </h2>
+<p>For wide variety of MHD instabilities operating in tokamaks,
+represented by normal modes of the form(assuming that cylindrical
+approximation and the toroidal representation may be ignored): <span
+class="math display">\[f(\psi,\vartheta, \varphi, t)=\sum\nolimits_m
+\tilde{f}(\psi) e^{i(m\vartheta + \eta \varphi - \omega t)}\]</span></p>
+<p>Is only unstable for perpendicular wave vectors.</p>
+<p>The reason is the enormous field line bending energy of the Alfven
+waves</p>
+<h2
+id="hamiltonian-description-of-the-ideal-fuid-by-p.j.morrison">Hamiltonian
+description of the ideal Fuid by P.J.Morrison</h2>
+<h2 id="classical-dynamics-a-modern-perspective">Classical Dynamics a
+Modern Perspective</h2>
+<h3 id="chapter-6">Chapter 6</h3>
+<p>A lot more importation stuff I forgot to write down, well I will
+start in chapter 6: If multiple canonical transformations, directly
+transforming would be canonical. <span class="math inline">\(w \to
+w&#39; \to w&#39;&#39;\)</span> then <span class="math inline">\(w \to
+w&#39;&#39;\)</span>. This is the group Composition Law.</p>
+<p>Next is the Associativity of Composition Law: if <span
+class="math inline">\(w’= \phi(w)\)</span>, <span
+class="math inline">\(w” = \Phi(w’)\)</span>, and <span
+class="math inline">\(w’&#39;&#39; = \xi(w&quot;)\)</span> so no matter
+what order of transformation they will be the same, whether (<span
+class="math inline">\(T_3(T_2T_2)\)</span> or <span
+class="math inline">\((T_3T_2)T_1\)</span> or anything of the such.</p>
+<p>Identity: The identity transformation w’ = w obviously obeys the
+conditions for being canonical.</p>
+<p>Inverses: If <span class="math inline">\(\omega \to \omega’\)</span>
+is canonical, then so is the transformation id <span
+class="math inline">\(\omega’ \to \omega\)</span>.</p>
+<p>"Thus all the properties needed to define a group are trivially
+obeyed. (In Chapter 12 we discuss group structure in a little more
+detail). "</p>
+<p>The canonical group is characterized by the dimension, 2k, of the
+phase space.</p>
+<p>The subgroups of such a phasespace is very large, though three can be
+easily defined.</p>
+<p>Another subgroup is the contact transformations.(when a poission
+bracket can be formed)</p>
+<p>Note: changing coordinate systems can satisfy phasespace rules, but
+isn’t generally considered to be a transformation</p>
+<p>"Intuitively speaking, a finite canonical transformation that can be
+connected continuously to the identity should be built up as a
+succession of infinitesimal transformations."</p>
+<p>To express the relation between Poission Brackets and canonical
+transformations through differential equations: <span
+class="math display">\[\frac{d \omega}{d \theta}= \{\omega^\mu,
+\phi(\omega)\}_\omega= \epsilon^{\mu v}\frac{\partial
+\phi(\omega)}{\partial \omega^v}\]</span></p>
+<p>Let us first clarify the meaning of this equation. We look upon the
+<span class="math inline">\(w^\mu\)</span> as functions of <span
+class="math inline">\(\theta\)</span>; <span
+class="math inline">\(\phi\)</span> is a function with a fixed
+functional form, and <span class="math inline">\(w^\mu\)</span> are the
+unknowns in the differential equation. Thus on the right-hand side of
+this equation, the arguments of <span
+class="math inline">\(\phi\)</span> are just the quantities we are
+trying to solve for. From the theory of differential equations, we know
+that there is a unique solution for <span
+class="math inline">\(w^\mu\)</span> if we are given the values of <span
+class="math inline">\(w^\mu\)</span> at <span
+class="math inline">\(\theta = 0\)</span>. Calling these boundary values
+of <span class="math inline">\(w^\mu\)</span> as <span
+class="math inline">\(w^\mu_0\)</span>, the solution of the equation can
+be written as: <span class="math display">\[\omega^\mu=
+\varphi^\mu(\omega_0; \theta), \space \space \space
+\varphi^\mu(\omega_0; 0) = \omega^\mu_0\]</span></p>
+<h3 id="chapter-7">Chapter 7</h3>
+<p>...</p>
+
+    </article>
+
+    <a class="back-to-notes" href="../notes.html">← Back to all notes</a>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>© <span id="year"></span> Alex Cason. Built as a static site.</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script src="../assets/js/data/social-links.js"></script>
+<script src="../assets/js/data/projects.js"></script>
+<script src="../assets/js/data/videos.js"></script>
+<script src="../assets/js/data/notes-index.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
