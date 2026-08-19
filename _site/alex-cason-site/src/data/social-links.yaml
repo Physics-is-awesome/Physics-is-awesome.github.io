@@ -1,0 +1,16 @@
+# Contact / social links.
+#
+# Leave a value empty ("") until you have a real URL for it — it simply
+# won't be shown. As soon as you fill one in, it appears on the About
+# page's Contact section automatically.
+#
+# Example once filled in:
+#   email: "mailto:alex@example.com"
+#   github: "https://github.com/yourusername"
+
+email: ""
+github: ""
+youtube: ""
+linkedin: ""
+scholar: ""
+orcid: ""
