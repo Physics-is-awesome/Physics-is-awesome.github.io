@@ -1,5 +1,5 @@
 # alexcason.dev — personal site
-
+ 
 A static personal/research site, built from small templates and content
 files rather than hand-edited HTML. A short Python script (`build.py`)
 assembles everything into `dist/`, a plain static site with no framework
