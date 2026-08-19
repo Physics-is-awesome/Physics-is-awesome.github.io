@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}YouTube — Alex Cason{% endblock %}
+{% block description %}Physics and computational-methods videos.{% endblock %}
+{% block content %}
+  <div class="wrap wrap--wide">
+    <div class="page-head">
+      <p class="eyebrow">YouTube</p>
+      <h1>Videos</h1>
+      <p class="lede">
+        Occasional videos on physics and numerical methods, built with a
+        custom <a href="projects.html">Manim-based animation framework</a>.
+        <a id="subscribe-link" href="#" class="is-hidden"></a>
+      </p>
+    </div>
+
+    <div id="video-grid" class="card-grid"></div>
+    <p id="video-empty" class="empty-state">No videos yet — check back soon.</p>
+
+    <!--
+      Videos are not authored on this page — add or edit entries in
+      src/data/videos.yaml and rebuild.
+    -->
+  </div>
+{% endblock %}

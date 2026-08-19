@@ -1,0 +1,1 @@
+const NOTES_INDEX = [];

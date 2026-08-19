@@ -1,0 +1,53 @@
+% tags: Tag One, Tag Two
+% summary: One or two sentences describing the note — shown on the notes index.
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb}
+
+\title{Note Title Goes Here}
+\date{2026-01-01}
+
+\begin{document}
+\maketitle
+
+Ordinary LaTeX prose goes here — your existing notes should mostly work
+unchanged, including \verb|\newcommand| macros, \verb|itemize|/\verb|enumerate|,
+\verb|figure| environments with \verb|\includegraphics|, and
+\verb|verbatim|/code blocks. Math (inline \(...\) and display
+\[...\] or \verb|equation|) is converted automatically and rendered with
+KaTeX.
+
+\section{A section heading}
+
+For example:
+\begin{equation}
+H(q, p) = \frac{p^2}{2m} + V(q)
+\end{equation}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.6\textwidth]{../assets/img/your-figure.png}
+  \caption{A caption explaining what the figure shows.}
+\end{figure}
+
+\end{document}
+
+% ---------------------------------------------------------------------
+% To publish this note:
+%   1. Copy this file to a new name, e.g. my-new-note.tex (the filename
+%      becomes the URL: notes/my-new-note.html).
+%   2. Keep the "% tags:" and "% summary:" comment lines at the very top
+%      — they're the only two pieces of metadata this build doesn't read
+%      from standard LaTeX commands (\title, \date already work as-is).
+%   3. Rebuild (requires pandoc — see README.md) — it will appear on the
+%      Notes index automatically, sorted by date.
+%
+% Figures referenced with \includegraphics need to actually exist at that
+% relative path (e.g. src/static/img/your-figure.png, referenced here as
+% ../assets/img/your-figure.png since notes live one level under the
+% published site's assets/ folder). LaTeX \label/\ref cross-references are
+% not resolved by this pipeline — write figure/equation references as
+% plain text instead.
+%
+% Files starting with an underscore (like this one) are never published —
+% that's what keeps this safe to leave in place as a template.
+% ---------------------------------------------------------------------

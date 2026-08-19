@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Notes — Alex Cason{% endblock %}
+{% block description %}A working knowledge base of derivations, physics and math notes, and research ideas — searchable and tagged.{% endblock %}
+{% block content %}
+  <div class="wrap">
+    <div class="page-head">
+      <p class="eyebrow">Notes</p>
+      <h1>Working notes</h1>
+      <p class="lede">
+        A running knowledge base — derivations, things I'm learning,
+        half-formed research ideas, and explanations I write mostly for
+        myself. LaTeX, figures, code, and references throughout.
+      </p>
+    </div>
+
+    <div class="notes-controls">
+      <div class="search-box">
+        <input type="search" id="notes-search" placeholder="Search notes…" aria-label="Search notes">
+      </div>
+      <div id="tag-filters" class="tag-filters" aria-label="Filter by tag"></div>
+    </div>
+
+    <div id="notes-list"></div>
+    <p id="notes-empty" class="empty-state">No notes published yet — check back soon.</p>
+
+    <!--
+      Notes are not authored on this page. To publish a new note, add a
+      Markdown (.md) or LaTeX (.tex) file to src/content/notes/ and
+      rebuild — see README.md for the exact format. This page (search,
+      tag filtering, and the list itself) is generated automatically from
+      whatever notes exist.
+    -->
+  </div>
+{% endblock %}

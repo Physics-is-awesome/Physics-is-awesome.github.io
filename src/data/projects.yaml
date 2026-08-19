@@ -1,0 +1,29 @@
+# Projects.
+#
+# This list starts empty on purpose — add a project by appending an entry
+# below and rebuilding. Leave `github` or `paper` as "" until a real link
+# exists; that button simply won't render until then.
+#
+# Fields:
+#   title        (required)
+#   status       active | progress | planned
+#   tagline      one line, shown in italics under the title
+#   description  a longer paragraph
+#   tags         a list of short topic tags
+#   github       repo URL, or ""
+#   paper        paper/docs URL, or ""
+#   notesLink    optional — link to a related page, e.g. "notes.html?tag=..."
+#   linkLabel    optional — defaults to "Repository"
+#
+# Example (copy this, uncomment, and edit):
+#
+# - title: Example Project
+#   status: progress
+#   tagline: One-line description of what it is
+#   description: >
+#     A longer description — what it does, why it's interesting, what
+#     physics or math it touches.
+#   tags: [Tag One, Tag Two]
+#   github: ""
+#   paper: ""
+#   linkLabel: Repository

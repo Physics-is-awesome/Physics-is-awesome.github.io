@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Projects — Alex Cason{% endblock %}
+{% block description %}Technical projects in numerical physics, symplectic integration, structure-preserving methods, plasma physics, and scientific computing.{% endblock %}
+{% block content %}
+  <div class="wrap wrap--wide">
+    <div class="page-head">
+      <p class="eyebrow">Projects</p>
+      <h1>Ongoing & completed work</h1>
+    </div>
+
+    <div id="project-grid" class="card-grid"></div>
+    <p id="project-empty" class="empty-state">No projects listed yet — check back soon.</p>
+
+    <!--
+      Projects are not authored on this page — add or edit entries in
+      src/data/projects.yaml (see the comment at the top of that file for
+      the schema) and rebuild. Each entry becomes a card automatically.
+    -->
+  </div>
+{% endblock %}
