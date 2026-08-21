@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Omega X — Alex Cason</title>
+<meta name="description" content="">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f4f5f1'/%3E%3Cellipse cx='16' cy='16' rx='11' ry='6' fill='none' stroke='%233b4c8c' stroke-width='1.6'/%3E%3Ccircle cx='27' cy='16' r='2.1' fill='%233b4c8c'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="../index.html" class="site-id">Alex Cason<span class="dot">.</span></a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="../index.html">Home</a>
+      <a href="../research.html">Research</a>
+      <a href="../projects.html">Projects</a>
+      <a href="../notes.html" aria-current="page">Notes</a>
+      <a href="../youtube.html">YouTube</a>
+      <a href="../about.html">About</a>
+      <a href="../cv.html">CV</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="note-header">
+      <p class="breadcrumb"><a href="../notes.html">← Notes</a></p>
+      <h1>Omega X</h1>
+      <div class="note-meta">
+      </div>
+    </div>
+
+    <article class="note-body">
+      <h1 id="omega-x">Omega-X</h1>
+<h2 id="pre-planingpart-1">Pre-planing(part 1)</h2>
+<h3 id="ideas-overarching-plan">Ideas &amp; Overarching Plan</h3>
+<p>Start with replicating 1D thermal fluid model, then start with more
+complex models, then experiment with other ways to do it, then dive
+deeper into the mathematics and hopefully come up with something(maybe
+metriplectic integrator), then create a code base, compare these systems
+to other traditional models, and create tokomak simulation(maybe, not
+sure if possible yet) that is it so far. Hopefully these ideas will
+evolve.</p>
+<p>Basically, the whole idea is to create a Flash-X like project with
+Metriplectic formulism underlying the the dynamics rather than
+lagrangian or Newtonian. Obviously much simpler though.</p>
+<h3
+id="metriplectic-4-bracket-algorithm-for-constructing-thermodynamically-consistent-dynamical-systems">Metriplectic
+4-bracket algorithm for constructing thermodynamically consistent
+dynamical systems</h3>
+<h4 id="math">Math</h4>
+<p>1: Identify dynamical variables 2: Propose energy and entropy
+functionals 3: Find Poisson bracket <span class="math inline">\({F,
+G}\)</span> for which entropy <span class="math inline">\(S\)</span> is
+a Casimir invariant, <span class="math inline">\({F, S} = 0 \forall
+F\)</span> 4: Construct metriplectic 4-bracket (F, K; G, N) via
+Kulkarni-Nomizu product by a new method that separates local
+thermodynamics from phenomenological quantities, giving the EoMs as
+Poisson bracket + 4-bracket</p>
+<p>To find the <span class="math inline">\(\Sigma\)</span> and <span
+class="math inline">\(M\)</span> a new method is derived. <span
+class="math display">\[\partial_t \xi^\alpha= \{\xi^\alpha , H\} +
+\nabla \cdot J^\alpha\]</span> <span class="math inline">\(\alpha = 1,
+2... N-1\)</span> <span class="math display">\[\partial_t \xi^N= \{\xi^N
+, H\} + \nabla \cdot J^N+Z_\alpha \cdot \tilde{L}^{\alpha \beta} \cdot
+Z_\beta\]</span> where <span class="math inline">\(\xi_N =
+\sigma\)</span>, the entropy density. Above splits Hamiltonian and
+conservative. Which leads to: <span class="math display">\[M(dF,
+dG)=F_{\xi N}G_{\xi N}\]</span> <span class="math display">\[\Sigma(dF,
+dG)=\nabla F_{\xi \alpha }\frac{L^{\alpha \beta}}{H_{\xi N}}\nabla
+(G_{\xi \beta})\]</span></p>
+<h3
+id="a-thermodynamically-consistent-discretizations-of-1d-thermal-fluid-models-using-their-metriplectic-4-bracket-structure">A
+thermodynamically consistent discretizations of 1D thermal-fluid models
+using their metriplectic 4-bracket structure</h3>
+<h4 id="math-1">Math</h4>
+<p>Edit: so I don’t keep forgetting, <span
+class="math inline">\(\rho\)</span> is mass density, <span
+class="math inline">\(m\)</span> is momentum density, and <span
+class="math inline">\(\sigma\)</span> is entropy density. Then for the
+thermodynamic quantities: <span class="math inline">\(\eta\)</span> is
+specific entropy, <span class="math inline">\(u\)</span> is velocity,
+and <span class="math inline">\(T\)</span> is temperature Let <span
+class="math inline">\(V_h = v_h \subset H^1(\Omega)\)</span> be the
+degree-p continuous Galerkin finite element space defined over a uniform
+grid, <span class="math inline">\(\tau_h\)</span>, on Ω: i.e. <span
+class="math display">\[V_h = {v_h  \in H^1(\Omega) : v_h|K \in P_p(K),
+\forall K \in T_h}\]</span> The discretizations is accomplished using
+the method of lines by positing that all dynamical fields have spatial
+dependence modeled in this Galerkin subspace. However, rather than
+discretizing the equations of motion themselves, we discretize the weak
+forms implied by the metriplectic formulation.<br />
+Let <span class="math inline">\((\rho_h. m_h. \sigma_h) \in V_h \times
+V_h \times V_h\)</span> So that the discretized Hamiltonian and entropy
+can be given as: <span class="math display">\[H^h[\rho_h. m_h.
+\sigma_h]= \int_\Omega [\frac{1m^2_h}{2 \rho_h}+\rho_h U (\rho_h,
+\frac{\sigma_h}{\rho_h}]dx\]</span> <span
+class="math display">\[S^h[\sigma_h]=\int_\Omega \sigma_h dx\]</span>
+Then the Metriplectic 4 Bracket can be expressed through: <span
+class="math display">\[(F^h, K^h, G^h, N^h)_h = -\frac{1}{\text{Re}}
+\int_{\Omega} \frac{1}{T_h} \left[ \left( K^h \partial_x F^h_{m_h} - F^h
+\partial_x K^h_{m_h} \right) \right],\]</span> <span
+class="math display">\[\left( N^h \partial_x G^h_{m_h} - G^h \partial_x
+N^h_{m_h} \right)  \\
++,\]</span> <span class="math display">\[\frac{1}{\text{Pr} \gamma - 1}
+\frac{1}{T_h} \left( K^h \partial_x F^h - F^h \partial_x K^h \right)
+\left[ \left( N^h \partial_x G^h - G^h \partial_x N^h \right) \right] \,
+dx\]</span><br />
+Then the poission bracket is thus: <span
+class="math display">\[\begin{aligned}
+\{F^h, H^h\}_h(u_h)= - (m_h \partial_x u_h, \phi_m)_{L^2} + (m_h u_h,
+\partial_x , \phi_m)_{L^2} - \\ (\rho_h \partial_x \eta_h,
+\phi_m)_{L^2}  + (\rho_h u_h, \partial_x , \phi_\rho)_{L^2} -
+(\sigma_h\partial_x T_h, \phi_m)_{L^2} + (\sigma_h u_h, \partial_x,
+\phi_\sigma)_{L^2}
+\end{aligned}\]</span> Now, one thing I will say is that this is not
+technically a Poisson bracket, because it is fails to satisfy the Jacobi
+identity. This is because it is impossible(or at least nobody has
+figured out a way to discretize fluid poission brackets.</p>
+<p>To then find equations of motion, adding them together <span
+class="math inline">\(F^h=\{F^h, H^h\}_h+(F^h, H^h; S^h, H^h)_h\)</span>
+where <span class="math inline">\(F^h\)</span> is the observable.</p>
+<p>In the case of momentum we must let <span
+class="math inline">\(\phi_\rho = \phi_\sigma = 0\)</span> so that only
+<span class="math inline">\(\phi_\rho\)</span> the momentum test
+function in the finite element(FE) test space <span
+class="math inline">\(V_h\)</span>.</p>
+<p><span class="math display">\[\begin{aligned}
+    (\phi_m, \partial_tm_h) + (m_h\partial_xu_h, \phi_m)_{L^2} - (m_h
+u_h, \partial_x, \phi_m)_{L^2}
+    + (\rho_h \partial_x \eta_h, \phi_m)_{L^2} + (\sigma_h\partial_xT_h
+\phi_m)_{L^2} +
+    \frac{1}{Re}(\partial_xu_h, \partial_x, \phi_m)_{L^2} = 0
+\end{aligned}\]</span><br />
+Next, I will have <span
+class="math inline">\(\phi_m=\phi_\sigma=0\)</span> to get continuity
+equations:<br />
+<span class="math display">\[\begin{aligned}
+    (\phi_\rho, \partial_g \rho_h)_{L^2}-(\rho_hu_h, \partial_x
+\phi_\rho)_{L^2}
+\end{aligned}\]</span></p>
+<p>Finally the entropy equation is derived in a similar fashion:</p>
+<p><span class="math display">\[\begin{aligned}
+    (\phi_\sigma, \partial_g \sigma_h)_{L^2}-(\sigma_h u_h, \partial_x
+\phi_\sigma)_{L^2}+\frac{1}{Re}[(\frac{(\partial_x u_h)^2}{T_h},
+\phi_\sigma)_{L^2}-\frac{1}{Pr}\frac{\gamma}{\gamma-1}[(\frac{\partial_x
+T_h}{T_h}, \partial_x\phi_\sigma)_{L^2}-(\frac{(\partial_x
+T_h)^2}{T_h^2}, \phi_\sigma)_{L^2} ]]
+\end{aligned}\]</span></p>
+<p>To prove energy conservation <span
+class="math display">\[(\frac{u^{n+1}_h-u^n_h}{\Delta t}, \delta
+h_h)=\frac{H(u^{n+1}_h)-H(U^n_h)}{\Delta t} = 0\]</span> Positive
+entropy production can be found through: <span
+class="math display">\[\frac{s^{n+1}_h-s^n_h}{\Delta t} =
+\frac{1}{Re}[(\frac{(\partial_x
+u^n_h)^2}{T^n_h},1)_{L^2}+\frac{1}{Pr}\frac{\gamma}{\gamma-1}\frac{(\partial_x
+T^n_h)^2}{T^n_h},1)_{L^2}]\geq 0\]</span></p>
+<p>Let’s figure out all we need to find for each equation, starting with
+momentum. Start with <span class="math inline">\(M_{ii}=\phi_m\)</span>,
+this should be equal to dx, but I will confirm. Also need the time
+derivative of the momentum variational, <span
+class="math inline">\(u_h\)</span> variational, <span
+class="math inline">\(\rho_h\)</span> variational, <span
+class="math inline">\(T_h\)</span>, <span
+class="math inline">\(\eta_h\)</span>, and <span
+class="math inline">\(\frac{1}{Re}\)</span>, reynolds number, decide
+later</p>
+<p><span class="math display">\[M_{ii}=dx\]</span> <span
+class="math display">\[u_h=(\rho_h, m_h, \sigma_h)\]</span> <span
+class="math inline">\(\rho_h\)</span>, <span
+class="math inline">\(T_h\)</span>, and <span
+class="math inline">\(\eta_h\)</span> are the respective fields,
+initialized simply and evolved through the equation. Obviously <span
+class="math inline">\(\rho_h, m_h,\)</span> and <span
+class="math inline">\(\sigma_h\)</span> evolve through their
+metriplectic equations of "motion." <span
+class="math inline">\(T_h\)</span>, <span
+class="math inline">\(\eta_h\)</span>, are evolved through these
+equations: <span class="math display">\[(\eta_h +
+\frac{m^2_h}{2\rho^2_h}-U(\rho_h, \frac{\sigma_h}{\rho_h})-\rho_h
+\partial_1 U(\\rho_h,
+\frac{\sigma_h}{\rho_h})+\frac{\rho_h}{\sigma_h}\partial_2U(\rho_h,
+\frac{\sigma_h}{\rho_h}, \phi_\eta)_{L^2}=0\]</span> <span
+class="math display">\[(u_h-\frac{m_h}{\rho_h},\phi_u)=0\]</span> <span
+class="math display">\[(T_h-\partial_2U(\rho_h,
+\frac{\sigma_h}{\rho_h})\phi_T)_{L^2}=0\]</span><br />
+Nothing new is added in continuity<br />
+Entropy adds: <span class="math inline">\(Pr\)</span> and <span
+class="math inline">\(\gamma\)</span></p>
+<h4 id="coding">Coding</h4>
+<p>The first thing is to use a Galerkin Method for projecting PDEs into
+a finite-dimensional function space. (can base off of Firedrake, FEniCS,
+Galerkin, or another) <span class="math inline">\(M_{ii}\)</span> in
+mesh.f90</p>
+<p>The second thing to do is to initialize the parameters and states(use
+mesh to calculate field) in states.f90 (<span
+class="math inline">\(Pr\)</span>, <span
+class="math inline">\(Re\)</span>, <span
+class="math inline">\(\gamma\)</span> for constants; initialize (<span
+class="math inline">\(\rho_h, \sigma_h, m_h, \eta_h, T_h,
+u_h\)</span>)</p>
+<p>Then functionals: calculates pointwise functional derivatives of the
+Total Hamiltonian and Entropy. in functionals.f90 (Update <span
+class="math inline">\(\rho_h, \sigma_h, m_h, u_h\)</span>)</p>
+<p>EOS.f90 is used to update the thermodynamic points(<span
+class="math inline">\(\eta_h, T_h\)</span>)</p>
+<p>Time step the program, by using Gauss-Legendre implicit Runge-Kutta
+methods in time_integration.f90</p>
+<p>Run the Program(using the driver and makefile)</p>
+<p>Input the outputs in io.f90</p>
+<p>Some notes: <span class="math inline">\((f,g)_{L^2}=\int_\Omega f(x)
+\cdot g(x)\)</span></p>
+<p>An example would be, for a point in the momentum equation <span
+class="math inline">\((\phi_m, \partial_t m_h)_{L^2}\)</span>, or the
+mass matrix times the derivative of momentum functional as a function of
+time. Thus it makes it so <span
+class="math inline">\(\phi_m=M_{ii}=dx\)</span> thus, <span
+class="math inline">\((\phi_m, \partial_t
+m_h)_{L^2}=dx\cdot\frac{m_h}{\partial t}\)</span></p>
+<h4 id="future-work">Future Work</h4>
+<p>The paper presents several ways to improve, or at least look into
+improving through future work.</p>
+<p>Mainly, they mention that many different structure preserving methods
+exist and may be more suitable.</p>
+<p>I also need to figure out how to make this codebase work for more
+examples</p>
+<h3
+id="metriplectic-framework-for-dissipative-magneto-hydrodynamics">Metriplectic
+Framework for Dissipative Magneto-Hydrodynamics</h3>
+<h4 id="my-introduction">My Introduction</h4>
+<p>In my time trying to figure out how to numerically solve metriplectic
+equations, someone beat me to dissipative magneto-hydrodynamics. Oh
+well, I can build off of.</p>
+<p>Beyond that, the abstract introduces the paper better than I could, "
+The metriplectic framework, which permits to formulate an algebraic
+structure for dissipative systems, is applied to visco-resistive
+Magneto-Hydrodynamics (MHD), adapting what had already been done for
+non-ideal Hydrodynamics (HD). The result is obtained by extending the HD
+sym metric bracket and free energy to include magnetic field dynamics
+and resistive dissipation. The correct equations of motion are obtained
+once one of the Casimirs of the Poisson bracket for ideal MHD is
+identified with the total thermodynamical entropy of the plasma. The
+metriplectic frame work of MHD is shown to be invariant under the
+Galileo Group. The metriplectic structure also permits to obtain the
+asymptotic equilibria toward which the dynamics of the system evolves.
+This scheme is finally adapted to the two-dimensional incompressible
+resistive MHD, that is of major use in many applications."</p>
+<h4 id="notes-on-introduction">Notes on introduction</h4>
+<p>They have an interesting word choice, "with its noble descendants of
+path integral representations," or Algebrization of dynamical systems
+appears to be the final destination of that virtuous route.</p>
+<p>MSTDOF means "microscopic, statistically treated, degrees of
+freedom"</p>
+<p>In this introduction they derive the metriplectic existence quite
+simply. Starting with the poission bracket <span
+class="math display">\[\dot{f}=\{f,g\}\]</span> In this case <span
+class="math display">\[0= \{S,H\}\]</span> Thus it is the Casimir
+functionals of the Poisson bracket <span
+class="math display">\[\{C,f\}=0 \forall f\]</span> From here we can
+define the Hamiltonian free energy. <span
+class="math display">\[F=H+\lambda C\]</span> Where <span
+class="math inline">\(\lambda\)</span> is an arbitrary constant left. In
+MSTDOF, it is the minus of the tempeture.</p>
+<p>To then expand the system, <span class="math inline">\(\langle\langle
+f,g \rangle \rangle\)</span> via <span class="math inline">\(F\)</span>.
+So that <span class="math inline">\(\langle\langle f, g\rangle
+\rangle=\{f,h\} + (f,g)\)</span> and <span
+class="math inline">\((f,g)\)</span> is symmetric, bilinear and
+semi-definite.</p>
+<p>Evolution is then given by <span
+class="math display">\[\dot{f}=\langle\langle f, F\rangle
+\rangle\]</span> (the symmetric bracket <span
+class="math inline">\((f,g)\)</span> will be defined so to cancel out
+the presence of the coefficient <span
+class="math inline">\(\lambda\)</span>, removing it from the equations
+of motion).</p>
+<p><span class="math inline">\((f,g)\)</span> is defined so that <span
+class="math inline">\(H\)</span> is conserved. <span
+class="math display">\[(H, f) = 0 \forall f\]</span> Thus metriplectic
+evolution reads: <span
+class="math display">\[\dot{f}=\{f,H\}+\lambda(f,C)\]</span> The Casimir
+to mimic entropy undergoes an evolution described by: <span
+class="math display">\[\dot{C}=\lambda(C,C)\]</span><br />
+Now, I like this introduction. Clearly showing the basic understanding
+on Metriplectic dynamics.</p>
+<h3 id="metriplectic-formulation-of-visco-resistive-mhd">METRIPLECTIC
+FORMULATION OF VISCO-RESISTIVE MHD</h3>
+<p>The system observed is fully ionized plasma. Where dissipation takes
+place due to the finite viscosity and resistivity of the fluid. Also,
+heat conductivity is finite. Here is the SO(3)-covariant
+form.(expressing physical equations in a way that is invariant under
+rotations in three-dimensional space) <span
+class="math display">\[\begin{aligned}
+\partial_t \rho + \partial_i (\rho u^i) &amp;= 0 \\
+\partial_t B^i + \varepsilon^{ijk} \partial_j E_k &amp;= 0, \quad
+\partial_i B^i = 0 \\
+\partial_t (\rho u^i) + \partial_j (\rho u^i u^j + p \delta^{ij}) &amp;=
+\varepsilon^{ijk} J_j B_k + \partial_j (\eta \, \partial_j u^i) \\
+\partial_t s + \partial_i (s u^i) &amp;= \frac{\eta}{T} \partial_i u^j
+\partial_i u^j + \frac{\kappa}{T^2} \partial_i T \partial_i T +
+\frac{\mu}{T} J^i J^i
+\end{aligned}\]</span> There is quite a bit to this equation, but I will
+move on.</p>
+<p>One thing I will add is a new notation. <span
+class="math inline">\(\dot{H}\overset{\partial}{=}0\)</span>, it simply
+means that means that <span class="math inline">\(\dot{H}\)</span> and 0
+only differ by a boundary term.</p>
+<p>They then describe the poission bracket for ideal MHD(when
+dissipation does not happen, thus traditional poission bracket).</p>
+<p>This equation has multiple Casimir observables. The paper mentions:
+<span class="math display">\[C[\rho,
+s]=\int_\mathbb{D}\rho\varphi(s)d^3x\]</span> Which within is both the
+total mass and entropy. <span
+class="math display">\[M[\rho]=\int_\mathbb{D}\rho d^3x\]</span> <span
+class="math display">\[S[\rho,s]=\int_\mathbb{D}\rho s d^3x\]</span>
+Thus, mass and entropy are conserved. There are some other, but
+obviously for this purpose, use the entropy.</p>
+<p>Taking the dissipative equations from the to combine <span
+class="math inline">\(D=(\vec{D}^\rho, \vec{D}^v, \vec{D}^B,
+\vec{D}^s)\)</span> something called an 8-uple. So we must want to
+define our metriplectic bracket as <span class="math inline">\(\psi =
+(\psi, D)\)</span> where <span class="math inline">\(\psi\)</span> is
+the dynamic variables.</p>
+<p>Uhm.. I just realized this wasn’t the paper I thought it was. Good
+read, but I don’t think I will continue these notes.</p>
+<h3
+id="a-least-action-principle-for-visco-resistive-hall-magnetohydrodynamic-with-metriplectic-reformulation">A
+least Action principle for visco-resistive Hall Magnetohydrodynamic with
+metriplectic reformulation</h3>
+<h4 id="abstract">Abstract</h4>
+<p>The abstract persented says,</p>
+<p>"We present a new variational formulation for Viscous and resistive
+Hall Magnetohydrodynamic. We first find a variational principle for
+ideal HMHD by applying the physical assumptions leading to HMHD at the
+lagrangian level, and then we add the viscous and resistive terms by the
+means of constrained variations. We also provide a metriplectic
+reformulation of our formulation, based on two canonical Lie-Poisson
+brackets for the ideal part and metric 4-brackets for the dissipative
+part."</p>
+<p>They then go into all of these, I will begin with the Metriplectic
+for notes alone.</p>
+<h4
+id="metriplectic-bracket-hamiltonian-and-entropy-for-viscoresistive-hall-mhd">Metriplectic
+bracket, Hamiltonian and Entropy for Viscoresistive Hall MHD</h4>
+<p>They use the Inclusive curvaturelike tensor found in Morrison’s
+recent work. Where the dissipation is included using a 4-bracket that
+have the same symmetries as a curvature tensor.</p>
+<p>They take the assumption that the viscous tensor can be found to be
+<span class="math display">\[\sigma=\Lambda \nabla u_i\]</span> Where
+<span class="math inline">\(\Lambda\)</span> is symmetrize and
+positive.</p>
+<h3
+id="variational-discretizations-of-viscous-and-resistive-magnetohydrodynamics-using-structure-preserving-finite-elements">Variational
+discretizations of viscous and resistive magnetohydrodynamics using
+structure-preserving finite elements</h3>
+<h4 id="abstract-1">Abstract</h4>
+<p>We propose a novel structure preserving discretization for viscous
+and resistive magnetohy drodynamics. We follow the recent line of work
+on discrete least action principle for fluid and plasma equation,
+incorporating the recent advances to model dissipative phenomena through
+a generalized Lagrange-d’Alembert constrained variational principle. We
+prove that our semi discrete scheme is equivalent to a metriplectic
+system and use this property to propose a Poisson spliting time
+integration. The resulting approximation preserves mass, energy and the
+diver gence constraint of the magnetic field. We then show some
+numerical results obtained with our approach. We first test our scheme
+on simple academic test to compare the results with estab lished
+methodologies, and then focus specifically on the simulation of plasma
+instabilities, with some tests on non Cartesian geometries to validate
+our discretization in the scope of tokamak instabilities.</p>
+<p>This paper</p>
+<h2 id="part-2">part 2</h2>
+<h3 id="coding1d-fluid">Coding(1D fluid)</h3>
+<h5 id="introduction">Introduction</h5>
+<p>My first step to creating my codebase is to create it for the
+simplest form. This is specifically made for the purpose of figuring
+things out, documenting it, and such things. So, I will be writing down
+each file.</p>
+<h5 id="mesh_1d">mesh_1d</h5>
+<p>Obviously, this mesh program creates the mesh for the program. The
+size <span class="math inline">\(N\)</span>, the nodes <span
+class="math inline">\(x\_nodes\)</span> and the mass matrix <span
+class="math inline">\(M_{ii}\)</span>. The rest are self explanatory but
+I will go into what the mass matrix is. It represents the discrete inner
+product of basis functions. <span
+class="math display">\[M_{ii}=(\phi_i,\phi_j)_{L^2}=\int_\Omega
+\phi_i(x)\phi_j(x)dx\]</span> So, <span
+class="math inline">\(M_{ii}\)</span> becomes a metric tensor for
+program. It turns continuous inner products into discrete sums over
+coefficients.</p>
+<p>It can be approximated through the "lumped mass matrix" where <span
+class="math inline">\(M_{ii}=dx\)</span> Though, I use the trapezoidal
+mass matrix: <span class="math display">\[M_{ii}(1) = 0.5d0 *
+dx\]</span> <span class="math display">\[M_{ii}(N) = 0.5d0 * dx\]</span>
+<span class="math display">\[M_{ii}(2:N-1) = dx\]</span> For more
+information visit, <a href="https://arxiv.org/pdf/2008.03883"
+class="uri">https://arxiv.org/pdf/2008.03883</a></p>
+<pre style="FORTRAN" data-caption="mesh\_1d.f90"><code>module mesh_1d
+  implicit none
+  private
+  public :: initialize_mesh, x_nodes, dx, N, Mii
+
+  ! Parameters
+  integer, parameter :: N = 100         ! Number of spatial grid points (nodes)
+  real(8), parameter :: L = 1.0d0       ! Length of the domain
+
+  ! Mesh data
+  real(8), dimension(N) :: x_nodes      ! Coordinates of each mesh node
+  real(8) :: dx                         ! Uniform cell spacing
+
+  ! Mass matrix (diagonal approximation here, for full FEM use full M)
+  real(8), dimension(N) :: Mii          ! Lumped mass matrix diagonal
+
+contains
+
+  subroutine initialize_mesh()
+    integer :: i
+
+    dx = L / (N - 1)
+
+    ! Initialize node positions
+    do i = 1, N
+      x_nodes(i) = (i - 1) * dx
+    end do
+
+    ! Lumped mass matrix: each diagonal entry is dx
+    Mii = dx
+
+    ! Uncomment below to use trapezoidal mass matrix
+    Mii(1) = 0.5d0 * dx
+    Mii(N) = 0.5d0 * dx
+    Mii(2:N-1) = dx
+
+  end subroutine initialize_mesh
+
+
+end module mesh_1d </code></pre>
+<h5 id="states_1d">states_1d</h5>
+<p>States then initializes the constants and fields. First the
+constants(parameters) used throughout the code. Re, Reynolds numbers.
+<span class="math inline">\(\gamma\)</span>, compression of the fluid.
+<span class="math inline">\(Pr\)</span>, Prandtl number, ratio of
+viscous to thermal diffusion.</p>
+<p>Then, it initializes the discretion fields of entropy, momentum,
+mass, temperature, and specific entropy.</p>
+<p>This should be modularized for the future to make this codebase
+iterative.</p>
+<p>Now, what exactly to do. I think for this, have constants in a
+separate one. Then for the fields, I am not sure at this moment.</p>
+<pre style="FORTRAN" data-caption="states\_1d.f90"><code>module states_1d
+  use mesh_1d
+  implicit none
+  private
+  public :: m_h, rho_h, sigma_h, eta_h, T_h
+  public :: initialize_states
+
+  ! Field arrays
+  real(8), allocatable :: m_h(:)       ! Momentum density
+  real(8), allocatable :: rho_h(:)     ! Mass density
+  real(8), allocatable :: sigma_h(:)   ! Entropy density
+  real(8), allocatable :: eta_h(:)     ! Specific entropy (diagnostic)
+  real(8), allocatable :: T_h(:)       ! Temperature (diagnostic)
+  real(8), parameter, public :: gamma = 1.4
+  real(8), parameter, public :: Pr = 0.71
+  real(8), parameter, public :: Re = 1000.0
+
+contains
+
+  subroutine initialize_states()
+    implicit none
+    integer :: i
+
+    ! Allocate fields
+    allocate(m_h(N))
+    allocate(rho_h(N))
+    allocate(sigma_h(N))
+    allocate(eta_h(N))
+    allocate(T_h(N))
+
+    ! Set initial conditions (example: Gaussian density bump)
+    do i = 1, N
+      rho_h(i) = 1.0d0 + 0.2d0 * exp(-100.0d0 * (x_nodes(i) - 0.5d0)**2)
+      eta_h(i) = 1.0d0
+      sigma_h(i) = rho_h(i) * eta_h(i)
+      m_h(i) = 0.5d0
+      T_h(i) = (0.4d0) * eta_h(i)  ! Ideal gas ! Uses EOS
+    end do
+
+  end subroutine initialize_states
+
+end module states_1d</code></pre>
+<h5 id="projection_matrix_1d">projection_matrix_1d</h5>
+<p>Here the creation of two subroutines to simplify future calculations.
+First, initialize_projection_matrix(), that simply creates matrix. Next,
+apply_weak_derivative(f, d_proj). This does: <span
+class="math display">\[proj=\sum_{i=1}^n(\sum_{j=1}^nD_{i,j})*f\]</span>
+Where <span class="math inline">\(f\)</span> is the observable. For
+future work, I think all I need to do for this one is create multiple
+for different dimensions.</p>
+<pre style="FORTRAN" data-caption="projection\_matrix\_1d.f90"><code>module projection_matrix_1d
+  use mesh_1d
+  implicit none
+  real(8), allocatable :: D(:,:)
+  public :: initialize_projection_matrix, apply_weak_derivative
+
+contains
+
+  subroutine initialize_projection_matrix()
+    integer :: i
+    real(8) :: dphi_dx
+    if (allocated(D)) then
+      deallocate(D)
+    end if
+
+    allocate(D(N, N))
+    D = 0.0d0
+
+    dphi_dx = 1.0d0 / dx
+
+    ! Loop over elements and assemble D
+    do i = 2, N-1
+      ! Local contributions from basis functions over each element
+      D(i, i-1) = -dphi_dx / 2.0d0
+      D(i, i  ) =  0.0d0
+      D(i, i+1) =  dphi_dx / 2.0d0
+    end do
+
+    ! Optional: Neumann (zero derivative) at boundaries
+    D(1,:) = 0.0d0
+    D(N,:) = 0.0d0
+  end subroutine initialize_projection_matrix
+
+  ! Applies D to f to compute (phi_i, partial_x f)
+  subroutine apply_weak_derivative(f, d_proj)
+    implicit none
+    real(8), intent(in)  :: f(N)
+    real(8), intent(out) :: d_proj(N)
+    integer :: i
+
+    d_proj = 0.0d0
+    do i = 1, N
+      d_proj(i) = sum(D(i,:) * f(:))
+    end do
+  end subroutine apply_weak_derivative
+
+end module projection_matrix_1d</code></pre>
+<h5 id="mass_1d">mass_1d</h5>
+<pre style="FORTRAN" data-caption="mass\_1d.f90"><code>module mass_1d
+  use mesh_1d
+  use projection_matrix_1d
+  implicit none
+contains
+
+  subroutine compute_mass_flux(N, rho_h, u_h, rho_rhs)
+    integer, intent(in) :: N
+    real(8), intent(in) :: rho_h(N), u_h(N)
+    real(8), intent(out) :: rho_rhs(N)
+    real(8) :: flux(N)
+    integer :: i
+
+    ! Compute flux
+    do i = 1, N
+      flux(i) = rho_h(i) * u_h(i)
+    end do
+
+    ! Apply weak derivative
+    call initialize_projection_matrix()
+    call apply_weak_derivative(flux, rho_rhs)
+
+    ! Divide by dx
+    do i = 1, N
+      rho_rhs(i) = -rho_rhs(i) / dx
+    end do
+
+    ! Boundary conditions
+    rho_rhs(1) = 0.0d0
+    rho_rhs(N) = 0.0d0
+
+  end subroutine compute_mass_flux
+
+end module mass_1d</code></pre>
+<h5 id="momentum_1d">momentum_1d</h5>
+<pre style="FORTRAN" data-caption="momentum\_1d.f90"><code>module momentum_1d
+  use states_1d, only: Re
+  use mesh_1d
+  use projection_matrix_1d
+  implicit none
+contains
+
+  subroutine compute_momentum_rhs(N, rho_h, m_h, sigma_h, eta_h, T_h, rhs_m)
+    integer, intent(in) :: N
+    real(8), intent(in) :: rho_h(N), m_h(N), sigma_h(N), eta_h(N), T_h(N)
+    real(8), intent(out) :: rhs_m(N)
+    real(8) :: u_h(N), du_proj(N), mu(N), dmu_proj(N), deta_proj(N), dT_proj(N)
+    integer :: i
+
+    ! Compute velocity
+    do i = 1, N
+      if (rho_h(i) &gt; 1.0d-12) then
+        u_h(i) = m_h(i) / rho_h(i)
+      else
+        u_h(i) = 0.0d0
+      end if
+    end do
+
+    ! Apply weak derivatives
+    call initialize_projection_matrix()
+    call apply_weak_derivative(u_h, du_proj)
+    do i = 2, N-1
+      mu(i) = m_h(i) * u_h(i)
+    end do
+    call apply_weak_derivative(mu, dmu_proj)
+    call apply_weak_derivative(eta_h, deta_proj)
+    call apply_weak_derivative(T_h, dT_proj)
+
+    ! Compute RHS
+    do i = 2, N-1
+      rhs_m(i) = 0.0d0
+      rhs_m(i) = rhs_m(i) - m_h(i) * du_proj(i) * dx
+      rhs_m(i) = rhs_m(i) + dmu_proj(i) * dx
+      rhs_m(i) = rhs_m(i) - rho_h(i) * deta_proj(i) * dx
+      rhs_m(i) = rhs_m(i) - sigma_h(i) * dT_proj(i) * dx
+      rhs_m(i) = rhs_m(i) - (1.0d0 / Re) * du_proj(i) * dx
+    end do
+
+    ! Boundary conditions
+    rhs_m(1) = 0.0d0
+    rhs_m(N) = 0.0d0
+
+  end subroutine compute_momentum_rhs
+
+end module momentum_1d</code></pre>
+<h5 id="entropy_1d">entropy_1d</h5>
+<pre style="FORTRAN" data-caption="entropy\_1d.f90"><code>module entropy_1d
+  use states_1d
+  use mesh_1d
+  use projection_matrix_1d
+  implicit none
+contains
+
+  subroutine compute_entropy_rhs(N, sigma_h, u_h, T_h, rhs_sigma)
+    implicit none
+    ! Dummy arguments
+    integer, intent(in) :: N
+    real(8), intent(in) :: sigma_h(N), u_h(N), T_h(N)
+    real(8), intent(out) :: rhs_sigma(N)
+
+    ! Local variables
+    real(8) :: flux(N), dx_u(N), dx_T(N)
+    real(8) :: visc_prod(N), heat_prod(N), heat_grad(N), heat_term(N)
+    integer :: i
+
+    ! Compute flux
+    do i = 1, N
+      flux(i) = sigma_h(i) * u_h(i)
+    end do
+
+    ! Apply weak derivatives
+    call initialize_projection_matrix()
+    call apply_weak_derivative(flux, rhs_sigma)
+    call apply_weak_derivative(u_h, dx_u)
+    call apply_weak_derivative(T_h, dx_T)
+
+    ! Viscous and thermal terms
+    do i = 1, N
+      visc_prod(i) = (dx_u(i)**2) / T_h(i)
+      heat_grad(i) = dx_T(i) / T_h(i)
+      heat_prod(i) = (dx_T(i)**2) / (T_h(i)**2)
+      heat_term(i) = (gamma / (gamma - 1.0d0)) * (heat_prod(i) - heat_grad(i) / dx)
+      rhs_sigma(i) = rhs_sigma(i) - (1.0d0 / Re) * visc_prod(i) * dx
+      rhs_sigma(i) = rhs_sigma(i) - (1.0d0 / (Re * Pr)) * heat_term(i) * dx
+    end do
+
+    ! Divide by dx
+    do i = 1, N
+      rhs_sigma(i) = -rhs_sigma(i) / dx
+    end do
+
+    ! Boundary conditions
+    rhs_sigma(1) = 0.0d0
+    rhs_sigma(N) = 0.0d0
+
+  end subroutine compute_entropy_rhs
+
+end module entropy_1d</code></pre>
+<h5 id="velocity_1d">velocity_1d</h5>
+<pre style="FORTRAN" data-caption="velocity\_1d.f90"><code>module velocity_1d
+  use states_1d
+  use projection_matrix_1d
+  implicit none
+contains
+
+  subroutine compute_velocity(N, rho_h, m_h, u_h)
+    implicit none
+
+    ! Dummy arguments
+    integer, intent(in) :: N
+    real(8), intent(in) :: rho_h(N), m_h(N)
+    real(8), intent(out) :: u_h(N)
+
+    ! Local variables
+    integer :: i
+    real(8), parameter :: eps = 1.0d-12  ! Small number to avoid division by zero
+
+    ! Compute velocity safely
+    do i = 1, N
+      if (rho_h(i) &gt; eps) then
+        u_h(i) = m_h(i) / rho_h(i)
+      else
+        u_h(i) = 0.0d0
+      end if
+    end do
+
+  end subroutine compute_velocity
+
+end module velocity_1d</code></pre>
+<h5 id="eos_1d_thermal">EOS_1d_thermal</h5>
+<pre style="FORTRAN" data-caption="EOS\_1d\_thermal.f90"><code>module eos_1d
+  use states_1d
+  implicit none
+  private
+  public :: compute_temperature, compute_eta
+
+
+
+contains
+
+  !------------------------------------------------------------
+  ! Compute temperature T from specific entropy eta
+  ! T = (gamma - 1) * eta
+  !------------------------------------------------------------
+  function compute_temperature(eta_h) result(T_h)
+    real(8), intent(in) :: eta_h
+    real(8) :: T_h
+
+    T_h = (gamma - 1.0d0) * eta_h
+  end function compute_temperature
+
+  !------------------------------------------------------------
+  ! Compute specific entropy eta from temperature
+  ! eta = T / (gamma - 1)
+  !------------------------------------------------------------
+  function compute_eta(T_h) result(eta_h)
+    real(8), intent(in) :: T_h
+    real(8) :: eta_h
+
+    eta_h = T_h / (gamma - 1.0d0)
+  end function compute_eta
+
+end module eos_1d</code></pre>
+<h5 id="time_integrator_1d">time_integrator_1d</h5>
+<pre style="FORTRAN" data-caption="time\_integrator\_1d.f90"><code>module time_integrator_1d
+  use mesh_1d
+  use states_1d
+  use velocity_1d
+  use eos_1d
+  use mass_1d
+  use momentum_1d
+  use entropy_1d
+  implicit none
+  private
+  public :: advance_one_step
+
+contains
+
+  subroutine advance_one_step(dt, u_h, rhs_m, rho_rhs, rhs_sigma)
+    real(8), intent(in) :: dt
+    real(8), intent(INOUT) :: u_h(N), rhs_m(N), rho_rhs(N), rhs_sigma(N)
+    integer :: i
+
+    ! Step 1: Compute velocity
+    call compute_velocity(N, rho_h, m_h, u_h)
+    
+    ! Step 2: calculate tempeture
+    do i = 1, N-1
+      T_h(i) = compute_temperature(eta_h(i)) 
+    end do
+    ! step three: calculate Eta
+    do i = 1, N-1
+      eta_h(i) =compute_eta(T_h(i))
+    end do
+    ! Step 4: Compute Galerkin RHS terms
+    call compute_momentum_rhs(N, rho_h, m_h, sigma_h, eta_h, T_h, rhs_m)
+    call compute_mass_flux(N, rho_h, u_h, rho_rhs)
+    call compute_entropy_rhs(N, sigma_h, u_h, T_h, rhs_sigma)
+
+    ! Step 5: Advance in time (Euler / RK1)
+    do i = 1, N
+      m_h(i)     = m_h(i)     + dt * rhs_m(i)
+      rho_h(i)   = rho_h(i)   + dt * rho_rhs(i)
+      sigma_h(i) = sigma_h(i) + dt * rhs_sigma(i)
+    end do
+
+  end subroutine advance_one_step
+
+end module time_integrator_1d</code></pre>
+<h5 id="io_1d">io_1d</h5>
+<pre style="FORTRAN" data-caption="io\_1d.f90"><code>module io_1d
+  use mesh_1d
+  use states_1d
+  use velocity_1d
+  use time_integrator_1d
+  implicit none
+  private
+  public :: write_state_to_csv
+
+contains
+
+  subroutine write_state_to_csv(filename)
+    implicit none
+    character(len=*), intent(in) :: filename
+    integer :: i
+    logical :: wait
+    real(8) :: u_h(N)
+    integer :: ierr
+    
+    ! Ensure the output directory exists
+    wait = .true.  ! Command should run synchronously
+    call execute_command_line(&quot;mkdir -p output&quot;, wait, ierr)
+    if (ierr /= 0) then
+        print *, &quot;Error: Could not create output directory!&quot;
+        stop
+    end if
+
+    ! Compute velocity u = m / rho
+    call compute_velocity(N, rho_h, m_h, u_h)
+
+    ! Open file for writing
+    open(unit=10, file=filename, status=&quot;replace&quot;, action=&quot;write&quot;, form=&quot;formatted&quot;)
+
+    ! Header
+    write(10, &#39;(A)&#39;) &#39;x,rho,m,sigma,u,T,eta&#39;
+
+    ! Data
+    do i = 1, N
+      write(10, &#39;(F12.6,1x,F12.6,1x,F12.6,1x,F12.6,1x,F12.6,1x,F12.6,1x,F12.6)&#39;) &amp;
+        x_nodes(i), rho_h(i), m_h(i), sigma_h(i), u_h(i), T_h(i), eta_h(i)
+    end do
+
+    close(10)
+  end subroutine write_state_to_csv
+
+end module io_1d</code></pre>
+<h5 id="d_thermal_driver">1D_Thermal_driver</h5>
+<pre style="FORTRAN" data-caption="momentum\_1d.f90"><code>program omega_x_driver_1d
+  use mesh_1d
+  use states_1d
+  use time_integrator_1d
+  use io_1d
+  implicit none
+  real(8) :: dt, t, t_end
+  integer :: step = 1
+  real(8), dimension(N) :: u_h, rhs_m, rho_rhs, rhs_sigma
+  character(len=100) :: fname
+  
+  dt = 1.0d-3
+  t_end = 1.0d0
+  t = 0.0d0
+  
+  call initialize_mesh()
+  call initialize_states()
+  u_h = 0.0d0
+  rhs_m = 0.0d0
+  rho_rhs = 0.0d0
+  rhs_sigma = 0.0d0  ! Explicitly initialize rhs_sigma here
+
+  do while (t &lt; t_end)
+    call advance_one_step(dt, u_h, rhs_m, rho_rhs, rhs_sigma)
+    t = t + dt
+    print *, &#39;t = &#39;, t
+
+    if (mod(step, 100) == 0) then
+        write(fname, &#39;(A,I4.4,A)&#39;) &quot;output/state_&quot;, step, &quot;.csv&quot;
+        call write_state_to_csv(fname)
+    end if
+
+    step = step + 1
+  end do
+end program omega_x_driver_1d</code></pre>
+<h4 id="plans">Plans</h4>
+<p>I have now create it in its most basic form, here are my next
+steps.</p>
+<p>Break states up into constants and fields(multi-dimensional
+fields)</p>
+<p>Make operators folder for projection, weak derivative, boundary
+conditions</p>
+<p>Add checks(mainly energy conservation)</p>
+<p>Upgrade time integration,(figure out)</p>
+<p>Make different spacial discretization</p>
+<p>More boundary conditions</p>
+<p>Add more physics</p>
+<p>Though, the main thing I need to work on is module registry + driver
+pattern.</p>
+<h2 id="part-3">part 3</h2>
+<h3 id="notes">Notes</h3>
+<h4 id="notes-on-module-fortran">Notes on module FORTRAN</h4>
+<p>I should have a main driver like:</p>
+<pre style="FORTRAN" data-caption="Omegax.f90"><code>program Omegax
+    use Driver_module
+    implicit none
+
+    call Driver_init()
+    call Driver_evolve()
+    call Driver_finalize()
+
+end program Omegaz</code></pre>
+<p>There should also be a a config file, saying which modules should be
+used, and a python script capable of parsing this registery file. Config
+would also be where parameters would be stored.</p>
+<h4 id="diminsionaless-programing">Diminsionaless programing</h4>
+<p>In the config file I can have a section to input the diminsions.</p>
+<p>Then have all variable allocatable based upon the diminsions</p>
+<p>then have an allocation based upon such diminsions(either
+preprocessor or generic shape handling)</p>
+<p>Instead of hardcoding loops, create cases for different
+diminsions.</p>
+<p>Generaliz derivatives and fluxes.</p>
+<p>Also, while physics sections should be generalized, initializing
+between 3D, would be beneficial.</p>
+<h4 id="generalize">Generalize</h4>
+<p>Due to Metriplectics dyanmics complex mathematics, a fully
+generalized system, like FLASH-X, is impossible. This is because it is a
+dynamical theory based upon Hamiltonian Mechanics, rather than forces in
+Newtonian.</p>
+<p>I am thinking the way to fix this is to create a symbolic python code
+to be able to generate the function I need.</p>
+<p>Also, since these would be in py</p>
+<h3 id="plan">Plan</h3>
+<p>I think the steps I am going to take are:</p>
+<p>1: Develop a python code that can generate the math I need, I would
+also like for it to be able to read a LaTeX code for it.</p>
+<p>2: I need to look into how to create a Config file for my problem at
+hand</p>
+<p>3: Fix integration for this new system</p>
+<p>4:</p>
+<h3 id="new-structure">New Structure</h3>
+<p>Here is the basic idea of what it should look like and do: <img
+src="../text/part_3/omega-x_overview.png" style="width:100.0%"
+alt="image" /></p>
+<h2 id="part-4">Part 4</h2>
+<p>It has been quite some time since I had last worked on this project
+so I am in a way starting anew.</p>
+<h3 id="summary-on-the-past">Summary On the Past</h3>
+<h3 id="ai-attempt">AI Attempt</h3>
+<p>Recently, I tried to use Claude AI to attempt to do something of a
+similar vein of this project. To see how capable it was, it quite
+surprised me. Here I will analysis its attempt; my initial view is that
+it misinterpretated what I wanted and relied on well developed past
+developments rather than the novel project I was attempting, but its
+ability to optimize and clearly write things out outpaces my ability,
+also using things like kernel development was and parallel computing was
+suprising.</p>
+<p>First, to help with my analysis I used the AI tool to develop its own
+analysis, then I will do a separate one on it.</p>
+<h4 id="ai-analysis">AI Analysis</h4>
+<h4 id="code">Code</h4>
+<h4 id="my-analysis">My Analysis</h4>
+
+    </article>
+
+    <a class="back-to-notes" href="../notes.html">← Back to all notes</a>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>© <span id="year"></span> Alex Cason. Built as a static site.</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script src="../assets/js/data/social-links.js"></script>
+<script src="../assets/js/data/projects.js"></script>
+<script src="../assets/js/data/videos.js"></script>
+<script src="../assets/js/data/notes-index.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Axiom — Alex Cason</title>
+<meta name="description" content="">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f4f5f1'/%3E%3Cellipse cx='16' cy='16' rx='11' ry='6' fill='none' stroke='%233b4c8c' stroke-width='1.6'/%3E%3Ccircle cx='27' cy='16' r='2.1' fill='%233b4c8c'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="../index.html" class="site-id">Alex Cason<span class="dot">.</span></a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="../index.html">Home</a>
+      <a href="../research.html">Research</a>
+      <a href="../projects.html">Projects</a>
+      <a href="../notes.html" aria-current="page">Notes</a>
+      <a href="../youtube.html">YouTube</a>
+      <a href="../about.html">About</a>
+      <a href="../cv.html">CV</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="note-header">
+      <p class="breadcrumb"><a href="../notes.html">← Notes</a></p>
+      <h1>Axiom</h1>
+      <div class="note-meta">
+      </div>
+    </div>
+
+    <article class="note-body">
+      <h1 id="axiom">Axiom</h1>
+<h2 id="structure">*Structure</h2>
+<h2 id="latex">LaTeX</h2>
+<h3 id="division-of-structure">Division of Structure</h3>
+<p>In this program I have used this structure to divide the book up:</p>
+<pre><code>    \part{}
+    \chapter{}
+    \section{}
+    \subsection{}
+    \subsubsection{}
+    \subsubsubsection{} % custom made
+    \paragraph
+    \subparagraph</code></pre>
+<p>I may have to learn new ways to divide in the future, but I will try
+to aviod that.</p>
+<h3 id="commands">Commands</h3>
+<p>Here are some commands that I will have here for reference:</p>
+<pre><code>    \begin{verbatim} writes things exactly, used mostly 
+    for writing LaTeX commands in this method
+    \label{} → Set a reference point
+    \ref{} → Refer to numbered items
+
+    \pageref{} → Refer to page number
+
+    \nameref{} (requires hyperref) → Refer to name/title 
+    of chapter/section
+
+    \autoref{} (requires hyperref) → Smart referencing 
+    (automatically adds “Chapter”, “Section”)
+    \begin{equation} ... \end{equation} → Numbered 
+    equations
+
+    \[ ... \] → Displayed, unnumbered equations
+
+    $ ... $ → Inline math
+
+    \frac{a}{b}, \sqrt{x}, \sum, \int → Standard 
+    math symbols
+
+    \begin{align} ... \end{align} (from amsmath) 
+    → Multi-line aligned equations
+
+    \begin{cases} ... \end{cases} → Piecewise functions
+
+    \bra{}, \ket{}, \braket{} → 
+    Use physics package for quantum notation
+
+    \tensor{} → Use tensor package 
+    for tensor indices
+
+    \dv{}, \pdv{} → Derivatives (from physics)
+    \begin{figure}[h!] ... \end{figure} → 
+    Insert figures
+
+    \includegraphics[width=0.8\textwidth]{file}
+    → Image inclusion (graphicx)
+
+    \caption{} / \label{} → Caption and reference
+
+    \begin{table}[h!] ... \end{table} → Tables</code></pre>
+<p>I also have begin{lstlisting} to write both FORTRAN and make. I will
+likely add python and Julia</p>
+
+    </article>
+
+    <a class="back-to-notes" href="../notes.html">← Back to all notes</a>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>© <span id="year"></span> Alex Cason. Built as a static site.</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script src="../assets/js/data/social-links.js"></script>
+<script src="../assets/js/data/projects.js"></script>
+<script src="../assets/js/data/videos.js"></script>
+<script src="../assets/js/data/notes-index.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
