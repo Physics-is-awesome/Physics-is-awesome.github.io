@@ -7,17 +7,19 @@
       <p class="eyebrow">YouTube</p>
       <h1>Videos</h1>
       <p class="lede">
-        Occasional videos on physics and numerical methods, often privilaging Hamiltonian and related ideas, but really just what ever I find interesting at the time</a>.
-        <a id="subscribe-link" href="#" class="is-hidden"></a>
+        Occasional videos on physics and numerical methods.
       </p>
     </div>
 
+    {% if videos_html %}
+    {{ videos_html | safe }}
+    {% else %}
     <div id="video-grid" class="card-grid"></div>
-    <p id="video-empty" class="empty-state">No videos yet — check back soon.</p>
+    <p id="video-empty" class="empty-state is-visible">No videos yet — check back soon.</p>
+    {% endif %}
 
     <!--
-      Videos are not authored on this page — add or edit entries in
-      src/data/videos.yaml and rebuild.
+      Videos are authored in src/data/videos.yaml and rendered at build time.
     -->
   </div>
 {% endblock %}

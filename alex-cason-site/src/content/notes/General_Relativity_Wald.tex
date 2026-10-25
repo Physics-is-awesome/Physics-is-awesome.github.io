@@ -1,0 +1,466 @@
+\chapter{General Relativity by Robert M. Wald}
+
+\subsection{Manifolds and Tensor Fields}
+\subsubsection{Manifolds}
+Spacetime is a four-dimensional continuum and by that nature a manifold is simply a multi-dimensional continuum.
+
+When going over this concept they first present an open ball, where  all points distance from a chosen center is always strictly less than some radius. Essentially the inside of some interval, circle, sphere, etc. Then an open set in $\mathbb{R}^n$ is any set that can be expressed as a union of open balls. This make $\mathbb{R}^n$ a topological space.
+
+Essentially a manifold is a set made up of peices that "look like" open subsets of $\mathbb{R}^n$. These peices can be "sewn together" smoothly. This can be more precisely defined a n-dimensional, $C^{\infty}$, real manifold M is a set together with a collection of subsets $\{ O_\alpha \}$ that satisfies the following properties: $O_\alpha$ covers the entire manifold, all points can be mapped onto another subset of $\mathbb{R}^n$, such subsets must be differentiable.
+
+These maps $\phi_\alpha$ are generally called charts by mathematicians and coordinate systems by physicist. They further define the maps to be homeomorphic, or that all mappings perserve topological properties.
+
+In Euclidean space they map a sphere into a two dimensional manifold; because, pieces can be smoothly sewn together. This then satisfies the above conditions.
+
+\subsubsection{Vectors}
+
+Because traditional vectors do not work in geometric curvature, vectors will be instead used as directional derivatives, rather than an intrinsic structure. These directional derivatives are characterized by their linearity and "Leibnitz" rule. Letting F denote collections of smoothly differentiable functions from M to R, $v: F \to \mathbb{R}$. Also, they give a proof that dim V = n = dim M. They also define the vector transformation law which is defined as:
+
+$$v^{'v}=\sum_{\mu=1}^n v^\mu \frac{\partial x^{'v}}{\partial x^\mu}$$
+
+\subsection{Tensors; the Metric Tensor}
+
+To define a tensor one must first define a dual vector space. A dual vector space is a space of the functional transformations from vectors to linear measurements. A double vector space takes those linear measurements and turns them into scalars. This double dual space is isomorphic to the original vector space. Reconstructing all measurements. This double dual space can be used to reconstruct the vector space using the dual vector space.
+
+Now to define a tensor, T, of type (k,l):
+\[
+T: V^* \times ... \times V^* \times V \times ... \times V \to \mathbb{R}
+\]
+In other words, given k dual vectors and l ordinary vectors, T produces a number. A number that if one where to fix the values of all of the other vectors and dual vectors, it is a linear map on the remaining variable. Thus, according to this definition, a tensor of type (0,1) is a dual vector. Of type (1, 0) a double dual vector. Because double dual vectors identify with traditional vectors, they are simply vectors. From this identification one can construct higher types of tensors. (1,1) is a multilinear map from V to V or for the other side.
+
+There are two important operations on tensors. The first being called the contraction. Defined as $C: \lambda(k,l) \to \lambda (k-1, l-1)$. Thus if T is a tensor of type (k,l), then:
+\[
+CT= \sum_{\sigma=1}^n T(..., v^{\sigma^*},...;...,v_\sigma,...)
+  \]
+  Where $v_\sigma$ is the basis of V and $v^{sigma^*}$ is its dual basis. These vectors are inserted into the ith and jth slot of T.(note this is specifically the contraction of tensor of type (1,1)).
+The next operation being the outer product if T and T'. Denoted as $T \otimes T^{'}$, by the following rules. Given (k+k') dual vectors $v^{k+1*},...,v^{k+k^{'*}}$ and the equivalent for l vectors. $T \otimes T^{*'}$ is defined as the product of $T(v^{1*},...,v^{k*};w_1,...,w_l)$ and $T(v^{k+1*},...,v^{k+k'*};w_{l+1},...,w_{l+l'})$. Thus, one way of constructing tensors is to take the outer product of vectors and dual vectors. A tensor of this would be called simple. From this any tensor of type (k,l) can be expressed as a sum of simple tensors.
+\[
+    T= \sum_{\mu_1,...,v_l=1}^n T^{\mu_1...\mu_k}_{v_1,...,v_l}v_{\mu_1} \otimes ... \otimes v^{v_l^*}
+  \]
+  The basis expansion of coefficens are called components of the tensor.
+
+  This discussion above refers to arbitrary finite-dimensional vector spaces. Now let us move onto where V is the tangent space $V_p$ at point p of a manifold M. In this $V_p^*$ is refereed to as the contangent space. Where at this point the vectors are cotangent vectors. Another term would be in V they are contravariant vectors and V* as covariant vectors.(remember $dx^\mu$ is a symbol that merely is defined as $dx^\mu(\frac{\partial}{\partial x^v})=\delta^\mu_v$).
+
+Finally, we have the defining property of all tensors, tensor transformation law.(though a multilinear map on vectors and dual vectors also works)
+\[
+T'^{\mu_1 \dots \mu_k}{}_{\nu_1 \dots \nu_l}
+=
+\frac{\partial x'^{\mu_1}}{\partial x^{\alpha_1}}
+\dots
+\frac{\partial x'^{\mu_k}}{\partial x^{\alpha_k}}
+\frac{\partial x^{\beta_1}}{\partial x'^{\nu_1}}
+\dots
+\frac{\partial x^{\beta_l}}{\partial x'^{\nu_l}}
+T^{\alpha_1 \dots \alpha_k}{}_{\beta_1 \dots \beta_l}
+  \]
+(for future notice this in Einstein summation)
+
+Now we have a tensor field. I will also add that coovariant vector field is as smooth as contravariant vector field. The tensor field's smoothness is defined the same way.
+
+Now one introduces a metric. Intuitively the metric gives the "infinitesimal square distance" associated with "infinitesimal displacement." As mentioned earlier this displacement is defined by the tangent vector. Thus a metric g, should be a linear map from $V_p \times v_p$ into numbers, ie a tensor of type (0,2). In addition, the metric must be symmetric and nondegenerate. Meaning $g(v_1,v_2)= g(v_2,v_1)$ and $g(v,v_1)=0$. Where $v_1 = 0$.
+
+In a coordianate basis, we may expand a metric in terms of its components as:
+\[
+g= sum_{\mu,v} g_{\mu \nu} dx^\mu \otimes dx^{\nu}
+  \]
+  Sometimes $ds^2$ is used in place of g to represent the metric tensor. Given a metric g, we can always find an orthonormal basis. The number of + and - signs occurring is called the signature of the metric. The Lorentzian is defined as - + + +.
+
+\subsubsection{Abstract Index Notation}
+In this indices do not represent components or numbers but rather the type of tensor. Repeated indices imply contraction(as lables not coordinate slots.)
+
+Also, (ab) implies symmetry and [ab] implies antisymmetry.
+
+Lastly, repeated index implies summation automatically.
+
+\subsection{Curvature}
+Generally curvature is defined as extrinsic curvature of a "surface" embedded in a higher dimensional space. There is also intrinsic curvature.
+
+Essentially, this intrinsic curvature can be defined through parallel transport. From here a geodesic is a curve whose tangent is parallel-transported along itself, or the "straightest possible" curve. A space is curved if a parallel geodesic is no longer parallel. One can use the definition of a derivative to define parallel transport as when the derivative along a given curve is 0. Thus the definition of curvature can be defined in terms of failure of successive differentiation on tensor fields to commute. Another thing to add is that given a metric manifold there exists a unique notion of parallel transport in which perserves the inner product of all pairs of vectors.
+
+\subsubsection{Derivative Operators and Parallel Transport}
+
+A derivative operator $\Delta$(sometimes called a covariant derivative) takes every differentiable tensor field of type (k,l) to a smooth tensor field of type (k, l+1) and satisfies linearity, Leibnitz rule, commutativity with all contraction, consistency, and torsion free(this fifth one is sometimes dropped).
+
+Given this one can derive an expression for the commutator of two vector fields.
+\[
+    [\nu, w]^b = \nu^a \Delta_a w^b - w^a \Delta_a v^b
+  \]
+
+  Next, the Christoffel symbol can be found as
+\[
+\Delta_a t^b = \partial_a t^b + \Gamma^b_{ac}t^c
+  \]
+  Now as mentioned earlier, parallel transport can be defined as
+\[
+t^a \Delta_a T^{b_1...}_{c_1...}=0
+  \]
+
+  If one choices a coordinate system it can then be defind as:
+\[
+t^a \partial_a v^b + t^a \Gamma^b_{ac}v^c = 0
+  \]
+  Or in terms of components in the coordinate system:
+\[
+\frac{dv^\nu}{dt} + \sum_{\mu , \nu} t^\mu \Gamma^\nu_{\mu \lambda}v^\lambda = 0
+  \]
+
+  While many forms of derivative operators can be defined from the general structure of a manifold, but metric manifolds privilege a specific kind.
+
+  In this case the Christoffel symbol can be defined by:
+
+\[
+  \Gamma^c_{ab} = \frac 12 g^{cd}\left(\hat{\Delta}_a g_{bd}+ \hat{\Delta}_b g_{ad} - \hat{\Delta}_d g_{ad} \right)
+  \]
+
+  Where $\hat{\Delta}$ refers to an arbitrary derivative operator.
+
+\subsubsection{Curvature}
+
+The Riemann Curvature Tensor is defined by:
+\[
+\Delta_a \Delta_b \omega_c - \Delta_b \Delta_a \omega_c = R_{abc}^d \omega_d
+  \]
+
+  From here the total change in the vector v can be found by:
+\[
+\delta v^a = \Delta t \Delta s v^d T^c S^b R_{cbd}^a
+  \]
+  Where s and t repersent infintesimal changes within the metric during the transport.
+
+  Now the key properties of the Riemann tensor are
+\[
+R_{abc}^d = - R_{bac}^d
+\]
+\[
+R_{[abc]}^d = 0
+\]
+\[
+R_{abcd}=-R_{abdc}
+\]
+And the Bianchi identity holds
+
+Decomposing the Riemann tensor into "trace part" and a "trace tree part" can be usful. As a trace over the first two or last two can to vanish
+\[
+R_{abc}^b=R_{ac}=R_{ca}
+\]
+The scalar curvature is further defined as
+\[
+R=R_a^a
+\]
+The "trace free part" is called the Weyl Tensor $C_{abcd}$ and is defined for manifolds $n >= 3$ by the equation
+\[
+R_{abcd}= C_{abcd} + \frac{2}{n-2}
+\]
+
+The Riemann Curvature Tensor is defined by:
+\[
+  \Delta_a \Delta_b \omega_c - \Delta_b \Delta_a \omega_c = R_{abc}^d \omega_d
+\]
+From here the total change in the vector v can be found by:
+\[
+\delta v^a = \Delta t \Delta s v^d T^c S^b R_{cbd}^a
+  \]
+
+Where s and t repersent infintesimal changes within the metric during the transport.
+
+Now the key properties of the Riemann tensor are
+\[
+R_{abc}^d = - R_{bac}^d
+\]
+\[
+R_{[abc]}^d = 0
+\]
+\[
+R_{abcd}=-R_{abdc}
+\]
+And the Bianchi identity holds
+
+Decomposing the Riemann tensor into "trace part" and a "trace tree part" can be usful. As a trace over the first two or last two can to vanish
+\[
+R_{abc}^b=R_{ac}=R_{ca}
+  \]
+  This defines the Ricci Tensor $R_{ac}$. From here the scalar Curvature, R, is defined as the trace of the Ricci tensor.
+\[
+R=R_a^a
+\]
+
+The "trace free part" is called the Weyl Tensor, $C_{abcd}$, and when diminsions are greater than 3.
+\[
+    C_{abcd}
+= R_{abcd}
+- \frac{2}{n-2}\left(g_{a[c}R_{d]b} - g_{b[c}R_{d]a}\right)
++ \frac{2}{(n-1)(n-2)}R\, g_{a[c}g_{d]b}.
+  \]
+  Because it behaves easily in conformal transformations it is sometimes referred to as the conformal tensor.
+
+  Next, Einstein tensor is found from the twice contracted Bianchi identity:
+\[
+G_{ab}=R_{ab}- \frac{1}{2}R g_{ab}
+  \]
+  This tensor is used to ensure the consistency of Einstein's equations.
+
+\subsubsection{Geodesics}
+One can define a geodesic as a curve whose tangent, $T^a$ satisfies this equation
+\[
+T^a \Delta_a T^b = 0
+  \]
+  Actually, one does not need to force the same length so this weaker condition may be true
+\[
+T^a \Delta_a T^b = \alpha T^b
+  \]
+  Where $\alpha$ is an arbitrary function on the curve.
+
+Thus, this means that a geodesic must be affine parameterized. Thus in a coordinate basis this becomes.
+\[
+\frac{d^2 x^\mu}{dt^2}+ \sum_{\sigma, \nu} \Gamma^\mu_{\sigma \nu} \frac{dx^\sigma}{dt} \frac{dx^\nu}{dt}=0
+  \]
+  Next, in order for simpler calculation, a Remmanian Normal coordinate can be used in which all geodesics are straight lines. It follows that the Christoffel symbol will vanish in this case.
+
+  In another form in which the derivative operator arises from the metric. One will use the Gaussian normal coordinate system. It is most useful when given a hypersurface. They satisfy the important property that geodesics remain orthogonal to all the hypersurfaces.
+
+  For a curve on a manifold the length can be derived to be:
+  \[
+l = \int (g_{ab}T^a T^b)^{1/2}dt
+\]
+Where T is tangent to the curve and t is the curve parameter.
+
+Obviously this is very similar to the traditional length formula.
+
+For Lorenzian space, a curve is said to be timelike if the norm of its tangent is negative everywhere. Null if equal to zero. Spacelike if positive.( for signature(-+++) )
+
+When it is null, the length is obviously zero. If it is timelike, we change the sing in the square root and use the term proper times. $\tau$
+\[
+\tau = \int (-g_{ab}T^aT^b)^{1/2}dt
+\]
+
+Note, since a geodesic tangent is parallel transported and thus the norm is constant. Meaning they will not change signatures.
+
+Next, to find the curve whose length does not change to first order under arbitrary smooth deformations. More concisely put, the extremized length. For this we will take the example of a spacelike curve in coordinate basis.
+\[
+l=\int_a^b \left(\sum_{\mu, \nu]}g_{\mu \nu}\frac{dx^\mu}{dt}\frac{dx^\nu}{dt}  \right)^{1/2} dt
+\]
+
+Where $C(a)=p$ and $C(b)=q$ are the endpoints of the curve. The extremization problem is obviously mathematically identical to extremization problem in action or in most all cases.
+\[
+\delta l=\int_a^b \left(\sum_{\mu, \nu}g_{\mu \nu}\frac{dx^\mu}{dt}\frac{dx^\nu}{dt}  \right)^{1/2} \sum_{\alpha, \beta} \left( g_{\alpha \beta}\frac{dx^\alpha}{dt}\frac{d(\delta x^\beta)}{dt} + \frac{1}{2} \sum_\sigma \frac{\partial g_{\alpha \beta}}{\partial x^\sigma} \delta x^\sigma \frac{dx^\alpha}{dt}\frac{dx^\beta}{dt} \right) dt
+\]
+
+Because the length is paramerterized independently, we may assume the origional curve was parameterized so that
+
+\[
+g_{ab}T^aT^b = 1 = \sum_{\mu, \nu} g_{\mu \nu} \frac{dx^\mu}{dt}\frac{dx^\nu}{dt}
+\]
+
+Thus the equation can be simplified to
+\[
+0 = \int_a^b \sum_{\alpha \beta} \left( g_{\alpha \beta}\frac{dx^\alpha}{dt}\frac{d(\delta x^\beta)}{dt} + \frac{1}{2} \sum_\sigma \frac{\partial g_{\alpha \beta}}{\partial x^\sigma} \delta x^\sigma \frac{dx^\alpha}{dt}\frac{dx^\beta}{dt} \right) dt
+\]
+
+It can be further simplified, but essentially the main point is that a curve extremizes the length between its endpoints if and only if it is a geodesic. Similar proof can be used to find that the geodesic equation (with affine parameterization) can be obtained from variation of the Lagrangian
+\[
+L= \sum_{\mu, \nu} g_{\mu \nu} \frac{dx^\mu}{dt}\frac{dx^\nu}{dt}
+\]
+
+The final task of this section is to derive the geodesic deviation equation. Let $\gamma_s(t)$ denote a smooth one-parameter family of geodesics. $\Sigma$ denote the two-dimensional submanifold spanned by the curve. Let s and t be coordinates of $\Sigma$. Vector field $T^a = (\partial / \partial t)^a$ is tangent to the family of geodesics and, thus, satisfies $T^a \nabla_a T^b = 0 $. Vector field $X^a=(\partial / \partial s)^a$ repersents the deviation vector. There is ``gauge freedom'' in $X^a$. In the sense that $X^a$ changes if one changes the affine parameterization.
+
+One may ensure that X and T are orthogonal using the metric. Further ensuring that S is made in such a way that $X^a T_a =0$.
+
+Next $\nu^ = T^b \nabla_b X^a$ gives the rate of change along a geodesic of the displacement. Thus the relative velocity. Thus,
+\[
+a^a=T^c \nabla_c v^a = T^c \nabla_c(T^b \nabla_b X^a)
+\]
+
+Is the relative acceleration.
+\[
+a^a = -R_{cbd}^a X^b T^c T^d
+\]
+This, using the Riemann tensor, is known as the geodesic deviation equation.
+
+Thus, one can find curve if $R_{abc}^d = 0$.
+
+\subsubsection{Methods of Computing Curvature}
+
+To begin, one must choose the coordinate system. Express the derivative operator $\nabla_a$ in terms of the ordinary derivative $\partial_a$ of this coordinate system and the Christoffel symbol $\Gamma^c_{ab}$. For a dual vector field $\omega_a$, we have:
+\[
+\nabla_b \omega_c = \partial_b \omega_c - \Gamma^d_{bc} \omega_d
+\]
+thus,
+\begin{align}
+  \nabla_a \nabla_b \omega_c = \partial_a(\partial_b \omega_c - \Gamma^d_{bc} \omega_d), \\
+  &\quad - \gamma^e_{ab}(\partial_e \omega_c - \Gamma^d_{ec}\omega_d) \\
+  &\quad - \Gamma^e_{ac}(\partial_e \omega_c - \Gamma^d_{bd} \omega_d)
+\end{align}
+
+Thus, the Riemann curvature tensor can be expressed:
+\[
+R_{abc}^d \omega_d = [-2 \partial_{a}\Gamma^d_{bc} + 2 \Gamma^e_{ca} \Gamma^d_{be}] \omega_d
+\]
+
+This can be simplified to for the coordinate system:
+\[
+R_{\mu \nu \rho}^\sigma = \pdv{x^\nu} \Gamma^\sigma_{\mu \rho} - \pdv{x^\mu}\Gamma^\sigma_{\nu \rho} + \sum_\alpha (\Gamma^\alpha_{\nu \rho} \Gamma^\sigma_{\alpha \nu} - \Gamma^\alpha_{\nu \rho} \Gamma^\sigma_{\alpha \mu})
+\]
+
+The Ricci tensor can then be obtained by contracting the above equation.
+
+There are some other importaint points. One can write the coordinate basis for components, $g_{\mu \nu}$, of the metric as a matrix. Then the components $g^{\mu \nu}$ will then obviously be the inverse. We can define g to be the determinate of $g_{\mu \nu}$.
+
+Then, the natural volume elementof the manifold is $\sqrt{|g|}dx^1....dx^n$.
+
+A simple formula may be derived for the contracted Chrisoffel symbol.
+\[
+\Gamma^a_{a \mu} = \sum_\nu \Gamma^\nu_{\nu \mu} = \frac 1 2 \sum_{\nu, \alpha} g^{\nu \alpha} \pdv{g_{\nu \alpha}}{x^\mu}
+\]
+
+Thus,
+\[
+\Gamma^a_{a \mu} = \frac 1 2 \frac{1}{g} \pdv{g}{x^\mu}
+\]
+
+This is useful as $\Gamma^a_{ab}$ is used in the Ricci Tensor as well as formulating the divergence of an arbitrary vector field.
+
+\subsubsection{Orthonormal Basis (Tetrad) Methods}
+
+In tensor calculations an orthonormal basis is in some cases advantagous, thus one develops a nonholonomic or noncoordinate, orthonormal basis of smooth vector field $(e_\mu)^a$ that satisfies:
+\[
+(e_\mu)^a(e_\nu)_a= \eta_{\mu \nu}
+\]
+
+where $\eta_{\mu \nu}= diag(-1,..,-1,1,..,1)$. In four dimensions, $(e_\mu)^a$ is called a tetrad. It is useful in the equation
+\[
+\sum_{\mu, \nu}\eta^{\mu \nu}(e_\mu)^a(e_\nu)_b = \delta^a_b
+\]
+
+Where $\delta$ is the identity map of the vectors and $\eta^{\mu \nu}$
+
+Calculation by tetrad has sufficent differences than the coordinate basis method. In both methods three key ingrediants are needed. 1: derivative operator that is compatable with the metric, $\Delta_a g_{bc} = 0$. 2: the derivative operator is torsion free. 3: the Riemann tensor is related to the derivative operator.
+
+\subsubsection{Einstein's Equations}
+\subsubsubsection{Special}
+Energy is the time component of the 4-vector momentum.
+
+A perfact fluid's Stress-energy tensor can be defined as
+\[
+T_{ab} = \rho u_a u_b + P(\eta_{ab}+ u_au_b)
+\]
+
+where $u^a$ is a unit timelike vector field representing the 4-velocity of the fluid. $\rho$ and P are the mass energy density and pressure of the fluid measured in its rest frame.
+
+a cool trick is that one can define the Euler's equations using non-relativistic limits.
+
+The stress energy of the Lorentz force:
+\[
+T_{ab}= \frac{1}{4 \pi} \left( F_{ac}F_b^c - \frac{1}{4}\eta{ab}F_{de}F^{de}   \right)
+\]
+
+\subsubsection{General}
+
+In general theory of Relativity, while it is possible to define background observers in such a way to define gravity for Earth. When time symmetry does not hold, such in 3-body problems, this is not the case and tidal forces are the only ``force'' with a meaningful definition.
+
+From the simple exploration of physical energy conservation in gravitational fields where the dimensions is small compared to the curvature of space, it can be found that all matter obeys the equation of motion:
+\[
+\nabla^a T_{ab}=0
+\]
+
+Through logical examinations the equation comes to be
+\[
+G_{ab}=R_{ab}-\frac{1}{2}Rg_{ab}=8 \pi T_{ab}
+  \]
+
+  Using a trace we find that
+\[
+R= - 8 \pi T
+  \]
+  and thus:
+\[
+R_{ab}= 8 \pi \left(T_{ab} - \frac{1}{2} T g_{ab}   \right)
+  \]
+
+
+  Thus, the entirety of GR can be summed up as followed. \emph{Spacetime is a manifold M on which there is defined a Lorentz Metric $g_{ab}$. The curvature of the metric is related to matter distribution via the Einstein's equation}.
+
+\subsubsection{Linearized Gravity}
+
+I am not sure what to write here...
+
+\section{Homogeneous, Isotropic Cosmology}
+...
+
+\section{The Schwarzschild Solution}
+\subsection{Derivation}
+For an object to be static, the time-like killing vector field must satisfy the following equation:
+
+\[
+\xi_{a}\Delta+b \xi_{C}=0
+  \]
+
+  From here, the fact that this shows that spacetime is camveriant in the time dimension leads to the metric can be defined as
+
+\[
+ds^2=-V^2(x^1,x^2,x^3)dt^2+ \sum_{\mu,\nu = 1}^3 h_{\mu \nu}(x^1,x^2,x^3)dx^\mu dx^\nu
+  \]
+
+  Where $V^2=-\xi_a \xi^a$, and the absence of $dt$ $dx^\mu$ cross terms expresses the orthogonality of $\xi^a$ and $\sigma$.
+
+From here time translation and reflection are here. In most cases something that is time invarient will also be time reflected but not when rotation is involved. If one takes it to be spherically symmetric:
+\[
+    ds^2 = r^2(d\theta^2+\sin^2\theta d\phi^2)
+  \]
+
+  In curved space, r does not have to be in relation to the radius, but for the purposes of this, we will take it as such.
+
+
+  the rest...
+
+
+
+  Now that we have the metric, we see that the solution is asymptotically flat, ie, as r approches infinity spacetime approches flat. Allowing the interpretation of an isolated body. Where C is equivalent to $-2M$.(Remember, natural units)
+
+  A striking feature is that the metric components become singular in both $r=2m$ and $r=0$. This is caused by either a breakdown of coordinate, or a singularity of the spacetime structure. We will see later that the singularity of 2M is simply a breakdown of coordinates while at 0 it is seen as a physical singularity.
+
+  It can also be found that for all spherically symmetric spacetimes with $R_{ab}=0$ are static.
+
+\subsection{Interior Solutions}
+
+Now take a static, spherical, stress energy tensor
+\[
+T_{ab}= \rho u_a u_b + P(g_{ab}+u_au_b)
+  \]
+
+  Where $u^a$ must point in the same direction as the static killing vector.
+
+  We can now take three independent forms of $T_{00}$, $T_{11}$, and $T_{22}$ using the metric derived earlier. To get h to be
+\[
+h(r)= \left(1- \frac{2m(r)}{r}   \right)^{-1}
+  \]
+
+  Here to have staticity, where $h \geq 0$, $r \geq 2m(r)$
+
+Where m(r) isn't exactly the proper mass but rather difference between the gravitational binding mass and the proper mass.
+
+
+From here they derive the Tolman-Oppenheimer-Volkoff equation or TOV. Which is the hydrostatic equilibrium with relativistic corrections. This equation comes with a limit where pressure required goes towards infinity as is the case of the singularity.
+
+\subsection{Geodesics}
+
+
+Not too much other than deriving gravitational lensing
+
+\subsection{Kruskal Extention}
+
+N/A
+
+
+\section{Methods for Solving Einstein's Equation}
+
+\subsection{Stationary, Axisymmetric Solutions}
+
+Earlier we have derived that a spacetime is said to be stationary if there exists a one-parameter group of isometries whose orbits are timelike curves. Thus every stationaly spacetime possesses a timelike killing vector field.
+
+A spacetime is called axistmmetric if there exists a one-parameter group of isometries whose orbits are closed spacelike curves. To have both
+
+\[
+\comm{\xi}{\psi} = 0
+  \]
+
+  these solutions are useful as they describe

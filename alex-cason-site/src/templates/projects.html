@@ -8,13 +8,16 @@
       <h1>Ongoing & completed work</h1>
     </div>
 
+    {% if projects_html %}
+    {{ projects_html | safe }}
+    {% else %}
     <div id="project-grid"></div>
-    <p id="project-empty" class="empty-state">No projects listed yet — check back soon.</p>
+    <p id="project-empty" class="empty-state is-visible">No projects listed yet — check back soon.</p>
+    {% endif %}
 
     <!--
-      Projects are not authored on this page — add or edit entries in
-      src/data/projects.yaml (see the comment at the top of that file for
-      the schema) and rebuild. Each entry becomes a card automatically.
+      Projects are authored in src/data/projects.yaml (see the comment at the
+      top of that file for the schema). They are rendered at build time.
     -->
   </div>
 {% endblock %}

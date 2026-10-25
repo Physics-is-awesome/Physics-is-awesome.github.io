@@ -1,5 +1,66 @@
 const PROJECTS = [
   {
+    "section": "Research",
+    "title": "CCSN Gravitational-Wave Memory Analysis for Next-Generation Detectors",
+    "status": "progress",
+    "tagline": "Characterizing GW memory from core-collapse supernovae",
+    "description": "Analysis of gravitational-wave memory from core-collapse supernovae (CCSNe), with an emphasis on its characterization and potential detectability using next-generation gravitational-wave detectors.",
+    "tags": [
+      "Gravitational Waves",
+      "Core-Collapse Supernovae",
+      "GW Memory",
+      "Next-Generation Detectors"
+    ],
+    "github": "",
+    "paper": ""
+  },
+  {
+    "section": "Open Source Code",
+    "title": "GeometricIntegrators.jl \u2014 Developer Documentation",
+    "status": "progress",
+    "tagline": "Improving docs for geometric numerical integration in Julia",
+    "description": "Contribution to the developer documentation of GeometricIntegrators.jl, an open-source Julia library for geometric numerical integration, with a focus on improving documentation structure, navigation, and developer guidance.",
+    "tags": [
+      "Julia",
+      "Geometric Integration",
+      "Documentation",
+      "Open Source"
+    ],
+    "github": "",
+    "paper": ""
+  },
+  {
+    "section": "Open Source Code",
+    "title": "GeometricIntegrators.jl \u2014 Hamiltonian-(finish)",
+    "status": "Initial planning",
+    "tagline": "Devloping Geometric numerical integrator",
+    "description": "(finish later)",
+    "tags": [
+      "Julia",
+      "Geometric Integration",
+      "numerics",
+      "Open Source"
+    ],
+    "github": "",
+    "paper": null
+  },
+  {
+    "section": "Open Source Code",
+    "title": "PlasmaPy \u2014 GEMPIC",
+    "status": "Initial planning",
+    "tagline": "Devloping Geometric Electromagnetic Particle in Cell",
+    "description": "(finish later)",
+    "tags": [
+      "python",
+      "plasma",
+      "Geometric Integration",
+      "numerics",
+      "Open Source"
+    ],
+    "github": "",
+    "paper": null
+  },
+  {
     "section": "YouTube",
     "title": "Metriplectic series 1: Why Ordinary Hamiltonians are non-dissipative",
     "status": "active",
@@ -51,7 +112,7 @@ const PROJECTS = [
     "section": "YouTube",
     "title": "Lie Operator Splitting: One of the Ten Pillars",
     "status": "active",
-    "tagline": "Lie operator splitting in numerical methods",
+    "tagline": "Introduction to Lie operator splitting in numerical methods",
     "description": "A look at Lie operator splitting, framed as one of 'ten pillars.'",
     "tags": [
       "Operator Splitting",
@@ -137,36 +198,6 @@ const PROJECTS = [
       "Scientific Computing",
       "BSSNOK",
       "Black Holes"
-    ],
-    "github": "",
-    "paper": ""
-  },
-  {
-    "section": "Research",
-    "title": "CCSN Gravitational-Wave Memory Analysis for Next-Generation Detectors",
-    "status": "progress",
-    "tagline": "Characterizing GW memory from core-collapse supernovae",
-    "description": "Analysis of gravitational-wave memory from core-collapse supernovae (CCSNe), with an emphasis on its characterization and potential detectability using next-generation gravitational-wave detectors.",
-    "tags": [
-      "Gravitational Waves",
-      "Core-Collapse Supernovae",
-      "GW Memory",
-      "Next-Generation Detectors"
-    ],
-    "github": "",
-    "paper": ""
-  },
-  {
-    "section": "Open Source Code",
-    "title": "GeometricIntegrators.jl \u2014 Developer Documentation",
-    "status": "progress",
-    "tagline": "Improving docs for geometric numerical integration in Julia",
-    "description": "Contribution to the developer documentation of GeometricIntegrators.jl, an open-source Julia library for geometric numerical integration, with a focus on improving documentation structure, navigation, and developer guidance.",
-    "tags": [
-      "Julia",
-      "Geometric Integration",
-      "Documentation",
-      "Open Source"
     ],
     "github": "",
     "paper": ""

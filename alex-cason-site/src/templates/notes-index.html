@@ -20,15 +20,18 @@
       <div id="tag-filters" class="tag-filters" aria-label="Filter by tag"></div>
     </div>
 
+    {% if notes_list_html %}
+    <div id="notes-list">
+{{ notes_list_html | safe }}
+    </div>
+    {% else %}
     <div id="notes-list"></div>
-    <p id="notes-empty" class="empty-state">No notes published yet — check back soon.</p>
+    {% endif %}
+    <p id="notes-empty" class="empty-state{% if not notes_list_html %} is-visible{% endif %}">No notes published yet — check back soon.</p>
 
     <!--
-      Notes are not authored on this page. To publish a new note, add a
-      Markdown (.md) or LaTeX (.tex) file to src/content/notes/ and
-      rebuild — see README.md for the exact format. This page (search,
-      tag filtering, and the list itself) is generated automatically from
-      whatever notes exist.
+      Notes are authored as Markdown (.md) or LaTeX (.tex) in src/content/notes/
+      and rendered at build time. Search/tag filtering are progressively enhanced by JS.
     -->
   </div>
 {% endblock %}

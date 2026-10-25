@@ -7,6 +7,13 @@ const NOTES_INDEX = [
     "date": ""
   },
   {
+    "slug": "General_Relativity_Wald",
+    "title": "General_Relativity_Wald",
+    "summary": "",
+    "tags": [],
+    "date": ""
+  },
+  {
     "slug": "Hamiltonian",
     "title": "Hamiltonian",
     "summary": "",

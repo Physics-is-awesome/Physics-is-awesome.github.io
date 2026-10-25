@@ -35,24 +35,95 @@
       <p class="eyebrow">YouTube</p>
       <h1>Videos</h1>
       <p class="lede">
-        Occasional videos on physics and numerical methods, often privilaging Hamiltonian and related ideas, but really just what ever I find interesting at the time</a>.
-        <a id="subscribe-link" href="#" class="is-hidden"></a>
+        Occasional videos on physics and numerical methods.
       </p>
     </div>
 
-    <div id="video-grid" class="card-grid"></div>
-    <p id="video-empty" class="empty-state">No videos yet — check back soon.</p>
+    <div id="video-grid" class="card-grid">
+      <article class="card video-card">
+        <div class="video-thumb"><img src="https://i.ytimg.com/vi/WF8mm-Z2oQM/hqdefault.jpg" alt="Metriplectic series 1: Why Ordinary Hamiltonians are non-dissipative thumbnail"></div>
+        <div class="video-body">
+          <h3><a href="https://www.youtube.com/watch?v=WF8mm-Z2oQM">Metriplectic series 1: Why Ordinary Hamiltonians are non-dissipative</a></h3>
+          <p>First in a series on metriplectic dynamics, starting from why ordinary Hamiltonian systems(Symplectic) cannot describe dissipation in order to motivate the metriplectic system..
+</p>
+          <span class="mono-label">~2026-10-12</span>
+        </div>
+      </article>
+      <article class="card video-card">
+        <div class="video-thumb"><img src="https://i.ytimg.com/vi/K4NQshgqGrM/hqdefault.jpg" alt="What is Velocity really? (joke video) thumbnail"></div>
+        <div class="video-body">
+          <h3><a href="https://www.youtube.com/watch?v=K4NQshgqGrM">What is Velocity really? (joke video)</a></h3>
+          <p>A joke video asking what velocity really is. Using obtuse mathematical abstraction.
+</p>
+          <span class="mono-label">~2026-10-03</span>
+        </div>
+      </article>
+      <article class="card video-card">
+        <div class="video-thumb"><img src="https://i.ytimg.com/vi/8vs1dTuPKFw/hqdefault.jpg" alt="Introduction to Discontinuous Galerkin through Toy Core Collapse Supernova thumbnail"></div>
+        <div class="video-body">
+          <h3><a href="https://www.youtube.com/watch?v=8vs1dTuPKFw">Introduction to Discontinuous Galerkin through Toy Core Collapse Supernova</a></h3>
+          <p>An introduction to discontinuous Galerkin methods, using a toy model of a self-gravitating fluid. Expanding even more by conserving energy as well as positivity.
+</p>
+          <span class="mono-label">~2026-09</span>
+        </div>
+      </article>
+      <article class="card video-card">
+        <div class="video-thumb"><img src="https://i.ytimg.com/vi/qgA-iY-iA4k/hqdefault.jpg" alt="Lie Operator Splitting: One of the Ten Pillars thumbnail"></div>
+        <div class="video-body">
+          <h3><a href="https://www.youtube.com/watch?v=qgA-iY-iA4k">Lie Operator Splitting: One of the Ten Pillars</a></h3>
+          <p>A look at Lie operator splitting, framed as one of &quot;ten pillars.&quot;
+</p>
+          <span class="mono-label">~2026-09</span>
+        </div>
+      </article>
+      <article class="card video-card">
+        <div class="video-thumb"><img src="https://i.ytimg.com/vi/bRJSR83mbBw/hqdefault.jpg" alt="Building Hyper Efficient Solar System Model: WHCKL thumbnail"></div>
+        <div class="video-body">
+          <h3><a href="https://www.youtube.com/watch?v=bRJSR83mbBw">Building Hyper Efficient Solar System Model: WHCKL</a></h3>
+          <p>Building a highly efficient solar system model using WHCKL. Able to simulate a reduced solar system for two billion years.
+</p>
+          <span class="mono-label">~2026-08</span>
+        </div>
+      </article>
+      <article class="card video-card">
+        <div class="video-thumb"><img src="https://i.ytimg.com/vi/T1Wavd506Do/hqdefault.jpg" alt="What if you exert a Planck Force onto the Earth? thumbnail"></div>
+        <div class="video-body">
+          <h3><a href="https://www.youtube.com/watch?v=T1Wavd506Do">What if you exert a Planck Force onto the Earth?</a></h3>
+          <p>Simulating a Planck force onto a TOV simulation of the Earth, or a close enough approximation, using Einstien toolkit. Then, trying to abstract out to see if one could destroy a universe.
+</p>
+          <span class="mono-label">~2026-08</span>
+        </div>
+      </article>
+      <article class="card video-card">
+        <div class="video-thumb"><img src="https://i.ytimg.com/vi/9vPSSewfwI4/hqdefault.jpg" alt="Variational Integrators for Reduced Magnetohydrodynamics thumbnail"></div>
+        <div class="video-body">
+          <h3><a href="https://www.youtube.com/watch?v=9vPSSewfwI4">Variational Integrators for Reduced Magnetohydrodynamics</a></h3>
+          <p>Deriving Variational integrators applied to reduced magnetohydrodynamics.
+</p>
+          <span class="mono-label">~2026-08</span>
+        </div>
+      </article>
+      <article class="card video-card">
+        <div class="video-thumb"><img src="https://i.ytimg.com/vi/yYiiJV7aWlY/hqdefault.jpg" alt="Introduction to Symplectic integrators thumbnail"></div>
+        <div class="video-body">
+          <h3><a href="https://www.youtube.com/watch?v=yYiiJV7aWlY">Introduction to Symplectic integrators</a></h3>
+          <p>An introduction to symplectic integrators.
+</p>
+          <span class="mono-label">~2026-08</span>
+        </div>
+      </article>
+    </div>
+    <p class="lede" style="margin-top:1rem;"><a id="subscribe-link" href="https://www.youtube.com/@Eudaimonia_society">Subscribe on YouTube →</a></p>
 
     <!--
-      Videos are not authored on this page — add or edit entries in
-      src/data/videos.yaml and rebuild.
+      Videos are authored in src/data/videos.yaml and rendered at build time.
     -->
   </div>
 </main>
 
 <footer class="site-footer">
   <div class="wrap">
-    <p>© <span id="year"></span> Alex Cason. Built as a static site.</p>
+    <p>© 2026 Alex Cason. Built as a static site.</p>
   </div>
 </footer>
 

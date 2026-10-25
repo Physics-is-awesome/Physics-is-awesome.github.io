@@ -15,7 +15,11 @@
     {% if show_contact %}
     <section class="section-gap">
       <h2 style="font-size:1.1rem;">Contact</h2>
+      {% if contact_html %}
+      {{ contact_html | safe }}
+      {% else %}
       <div id="contact-container"></div>
+      {% endif %}
     </section>
     {% endif %}
   </div>
