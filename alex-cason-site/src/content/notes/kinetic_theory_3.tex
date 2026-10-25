@@ -1,0 +1,131 @@
+\chapter{Kinetic Theory: Classical, Relativistic, and Quantum}
+\section{Math}
+\subsection{Eigenfunction expansion and resolvent}
+An example of the application of the Liouville equation integrating factor is an ideal gas.
+
+Taking the purely kinetic Hamiltonian
+
+\[
+H = \sum_{s=1}^N \frac{p^2_s}{2m}, \quad 0 \leq x^{i}_s \leq L
+  \]
+  Where $ x^{i}_s$ denotes the  Cartesian component of $\mathbf{x}_s$. Let us call the $\vu{\Lambda}$ operator. Thus:
+
+\[
+\vu{\Lambda}_0 = -i \sum_s \pdv{H}{\mathbf{p}_s} \cdot \pdv{}{\mathbf{x}_s} = -i \sum_s \mathbf{v}_s \cdot \pdv{}{\mathbf{x}_s}
+  \]
+
+  The Eigenfunctions of $\vu{\Lambda}$ satisfy the eigenvalue equation.
+
+Taking this and solving we get
+\[
+D(\mathbf{x}^n, \mathbf{p}^N, t) = \frac{1}{L^{3N/2}}\sum_k D_k \mathbf{p}^Ne^{i \sum_s k_s \cdot (\mathbf{x}_s-\mathbf{v}t)}
+  \]
+
+  Taking a free particle propagator we find that one evolves the function through time via
+\[
+  \exp{-t \mathbf{v_s}} \cdot \pdv{}{\mathbf{x}_s} \]
+
+One last solution technique presented to initial value problems for the Liouville equation uses the Laplance transform operated upon the Liouville equation
+\[
+\int_0^\infty dte^{-st}\left(i \pdv{D}{t} = \vu{\Lambda}D  \right)
+  \]
+
+  From there we define
+\[
+\vu{R} = (\vu{\Lambda} - is)^{-1}
+  \]
+  as the resolvent operator.
+
+\subsection{Distribution Functions}
+
+Nothing
+
+\subsection{Markov Process}
+
+Given the phase vector $z = (1,2,...,N)$, in terms of this variable, the two-time, or conditional, distribution function may be written at the product
+\[
+\prod (z,t \mid z_0, t_0) dz
+  \]
+
+  This distribution has three fundemental principles
+\begin{itemize}
+  \item The system undergoes a transition from some state in the interval $t-t_0$
+  \item The system does not change its state in zero time
+  \item The function $\Pi$ obeys the chapman-kolmogorov equation
+\end{itemize}
+\[
+  \Pi (z,t \mid z_0, t_0) = \int  \Pi (z,t \mid z', t') \Pi (z',t' \mid z_0, t_0)dz'
+\]
+The integral represents a sum over intermediate states.
+
+For systems whose behavior is homogeneous in time, processes can only depend on the time interval and not the initial or final times.
+
+Our aim is then to obtain a differential equation for $\Pi$ appropriate to the case where phase variables go over a countable set.
+
+The integral equation becomes
+\[
+\Pi( l \mid l_0 ; t+ \delta t ) = \sum_{\forall j} \Pi ( l \mid j ; \delta t ) \Pi ( j \mid l_0 ; t )
+  \]
+
+  Conditions 1 and two become
+\[
+\sum_{\forall l}\Pi (l \mid l_0; t) =1
+  \]
+\[
+\Pi(l \mid l_0;0) = \delta_{ll_0}
+  \]
+  For $l \neq j$
+\[
+\Pi (l \mid j; \delta t) \to 0 \, \text{as} \, \delta t \to 0
+  \]
+
+  With some further derivation I won't go into we get the canonical form of the mater equation
+\[
+  \pdv{\Pi(l \mid l_0 ; t)}{t} = \sum_j (w_{jl} \Pi (j \mid l_0 ; t) - w_{lj} \Pi (l \mid l_0; t))
+\]
+
+Which is essentially this psuedo equation
+$$\text{Change} = \text{Gain} - \text{Loss}$$
+
+\subsection{Central Limit Theorem}
+
+Variance is writen as
+\[
+D(\xi) = \sum_{\forall x}(x - \langle x \rangle)^2 P(x)
+  \]
+
+  The characteristic function being
+\[
+  \phi(a) = \sum_{\forall x} P(x)e^{iax}  \]
+
+From here we can take a Fourier transformation expand into a series that will be used later. We can then define a random walk.
+
+An importaint distribution is defined as
+\[
+P(l,n) = \frac{n !}{r!(n-r)!}\mathfrak{p}^r(1- \mathfrak{p})^{n-r}
+  \]
+  When we define $r \equiv \frac{n+l}{2}$.
+
+This lets us use some math to define
+\[
+    P(r) \equiv = P(r, \frac{\lambda}{n} = \frac{\lambda '}{r!}e^{-\lambda}  \]
+
+More commonly known as the Poisson distribution.
+
+\section{Analyses of the Liouville Equation}
+
+\subsection{BBKGY Hierarchy}
+
+Generalizing what I have already done.
+
+\subsection{Correlation Extrapolation: Vlasov limit}
+If we assume $N \gets s$, then we can rewrite as
+\[
+\left(\pdv{}{t} - \vu{L_s}  \right)f_s = \vu{I}_s f_{s+1}
+  \]
+
+  With some further math we can define both how dense the fluid is and how strongly coupled.
+
+  Vlasov equation results in the a well defined limit, that can be caused by plasma comprised of electrons in a neutralizing, fixed, positive background.
+
+\subsection{Diagrams: Prigogine Analysis}
