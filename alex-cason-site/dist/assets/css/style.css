@@ -525,6 +525,20 @@ main{ padding: 3rem 0 5rem; }
 .video-card .video-body{ padding: 1.2rem 1.4rem 1.4rem; display: flex; flex-direction: column; gap: .5rem; }
 
 /* -------------------------------------------------------------------- */
+/* Project sections                                                     */
+/* -------------------------------------------------------------------- */
+.project-section{ margin-top: 3rem; }
+.project-section:first-of-type{ margin-top: 0; }
+.project-section__header{ margin-bottom: 1.2rem; }
+.project-section__header h2{
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: -.01em;
+}
+.project-section .card-grid{ margin-top: 0; }
+
+/* -------------------------------------------------------------------- */
 /* Misc utility                                                         */
 /* -------------------------------------------------------------------- */
 .section-gap{ margin-top: 3.5rem; }

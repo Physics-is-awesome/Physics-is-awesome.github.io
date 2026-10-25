@@ -2,17 +2,17 @@ const SOCIAL_LINKS = [
   {
     "label": "Email",
     "key": "email",
-    "url": ""
+    "url": "mailto:ajcason@outlook.com"
   },
   {
     "label": "GitHub",
     "key": "github",
-    "url": ""
+    "url": "https://github.com/Physics-is-awesome"
   },
   {
     "label": "YouTube",
     "key": "youtube",
-    "url": ""
+    "url": "https://www.youtube.com/@Eudaimonia_society"
   },
   {
     "label": "LinkedIn",

@@ -28,28 +28,86 @@ function renderProjects() {
   }
   if (emptyEl) emptyEl.classList.remove("is-visible");
 
-  el.innerHTML = PROJECTS.map((p) => {
-    const links = [];
-    if (p.github) links.push(`<a href="${p.github}">${p.linkLabel || "Repository"} →</a>`);
-    if (p.paper) links.push(`<a href="${p.paper}">Paper / docs →</a>`);
-    if (p.notesLink) links.push(`<a href="${p.notesLink}">Related notes →</a>`);
-    const linksHtml = links.length
-      ? `<div class="card-links">${links.join("")}</div>`
-      : `<div class="card-note">${p.status === "planned" ? "Not yet started publicly" : "Repository forthcoming"}</div>`;
+  const sections = ["YouTube", "Personal Projects", "Research", "Open Source Code"];
+  const projects = Array.isArray(PROJECTS) ? PROJECTS : [];
 
-    return `
-      <article class="card">
-        <div class="card-top">
-          <h3>${escapeHtml(p.title)}</h3>
-          <span class="status status--${p.status}">${statusLabel(p.status)}</span>
-        </div>
-        <p><em>${escapeHtml(p.tagline)}</em></p>
-        <p>${escapeHtml(p.description)}</p>
-        <div class="tags">${p.tags.map((t) => `<span class="tag">${escapeHtml(t)}</span>`).join("")}</div>
-        ${linksHtml}
-      </article>
-    `;
-  }).join("");
+  const hasSections = projects.some((p) => p && p.section);
+  if (hasSections) {
+    const grouped = {};
+    for (const s of sections) grouped[s] = [];
+    for (const p of projects) {
+      const key = p.section || p.category || sections[0];
+      if (!grouped[key]) grouped[key] = [];
+      grouped[key].push(p);
+    }
+
+    el.innerHTML = sections
+      .map((s) => {
+        const items = grouped[s] || [];
+        if (!items.length) return "";
+        const cards = items
+          .map((p) => {
+            const links = [];
+            if (p.github) links.push(`<a href="${p.github}">${p.linkLabel || "Repository"} →</a>`);
+            if (p.paper) links.push(`<a href="${p.paper}">Paper / docs →</a>`);
+            if (p.notesLink) links.push(`<a href="${p.notesLink}">Related notes →</a>`);
+            const linksHtml = links.length
+              ? `<div class="card-links">${links.join("")}</div>`
+              : `<div class="card-note">${p.status === "planned" ? "Not yet started publicly" : "Repository forthcoming"}</div>`;
+
+            return `
+              <article class="card">
+                <div class="card-top">
+                  <h3>${escapeHtml(p.title || "")}</h3>
+                  ${p.status ? `<span class="status status--${p.status}">${statusLabel(p.status)}</span>` : ""}
+                </div>
+                ${p.tagline ? `<p><em>${escapeHtml(p.tagline)}</em></p>` : ""}
+                <p>${escapeHtml(p.description || "")}</p>
+                ${Array.isArray(p.tags) && p.tags.length ? `<div class="tags">${p.tags.map((t) => `<span class="tag">${escapeHtml(t)}</span>`).join("")}</div>` : ""}
+                ${linksHtml}
+              </article>
+            `;
+          })
+          .join("");
+        return `
+          <section class="project-section">
+            <header class="project-section__header">
+              <h2>${escapeHtml(s)}</h2>
+            </header>
+            <div class="card-grid">${cards}</div>
+          </section>
+        `;
+      })
+      .join("");
+
+    if (emptyEl) emptyEl.classList.remove("is-visible");
+    return;
+  }
+
+  el.innerHTML = projects
+    .map((p) => {
+      const links = [];
+      if (p.github) links.push(`<a href="${p.github}">${p.linkLabel || "Repository"} →</a>`);
+      if (p.paper) links.push(`<a href="${p.paper}">Paper / docs →</a>`);
+      if (p.notesLink) links.push(`<a href="${p.notesLink}">Related notes →</a>`);
+      const linksHtml = links.length
+        ? `<div class="card-links">${links.join("")}</div>`
+        : `<div class="card-note">${p.status === "planned" ? "Not yet started publicly" : "Repository forthcoming"}</div>`;
+
+      return `
+        <article class="card">
+          <div class="card-top">
+            <h3>${escapeHtml(p.title || "")}</h3>
+            ${p.status ? `<span class="status status--${p.status}">${statusLabel(p.status)}</span>` : ""}
+          </div>
+          ${p.tagline ? `<p><em>${escapeHtml(p.tagline)}</em></p>` : ""}
+          <p>${escapeHtml(p.description || "")}</p>
+          ${Array.isArray(p.tags) && p.tags.length ? `<div class="tags">${p.tags.map((t) => `<span class="tag">${escapeHtml(t)}</span>`).join("")}</div>` : ""}
+          ${linksHtml}
+        </article>
+      `;
+    })
+    .join("");
 }
 
 // -- Videos ---------------------------------------------------------------
