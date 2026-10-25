@@ -24,10 +24,11 @@
     <div id="notes-list">
 {{ notes_list_html | safe }}
     </div>
+    <p id="notes-empty" class="empty-state">No notes published yet — check back soon.</p>
     {% else %}
     <div id="notes-list"></div>
+    <p id="notes-empty" class="empty-state is-visible">No notes published yet — check back soon.</p>
     {% endif %}
-    <p id="notes-empty" class="empty-state{% if not notes_list_html %} is-visible{% endif %}">No notes published yet — check back soon.</p>
 
     <!--
       Notes are authored as Markdown (.md) or LaTeX (.tex) in src/content/notes/
