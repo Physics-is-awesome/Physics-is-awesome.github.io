@@ -19,40 +19,15 @@
       <a href="youtube.html">videos</a>.
     </p>
 
-    <div class="phase-portrait" aria-hidden="false">
-      <svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schematic phase portrait of a simple pendulum, showing closed orbits, a separatrix, and open rotation curves">
-        <line class="axis" x1="20" y1="130" x2="680" y2="130"/>
-        <line class="axis" x1="350" y1="16" x2="350" y2="244"/>
-        <text class="axis-label" x="662" y="124">q</text>
-        <text class="axis-label" x="356" y="26">p</text>
-
-        <!-- rotation regime (open curves) -->
-        <path class="rotation" d="M0,10 Q35,3 70,10 T140,10 T210,10 T280,10 T350,10 T420,10 T490,10 T560,10 T630,10 T700,10"/>
-        <path class="rotation" d="M0,250 Q35,257 70,250 T140,250 T210,250 T280,250 T350,250 T420,250 T490,250 T560,250 T630,250 T700,250"/>
-
-        <!-- separatrix -->
-        <path class="separatrix" d="M40,130 C150,26 550,26 660,130"/>
-        <path class="separatrix" d="M40,130 C150,234 550,234 660,130"/>
-
-        <!-- libration orbits -->
-        <ellipse class="orbit" cx="350" cy="130" rx="170" ry="80"/>
-        <path id="orbit-mid-path" class="orbit orbit--mid" d="M 465,130 A 115,54 0 1 1 235,130 A 115,54 0 1 1 465,130 Z"/>
-        <ellipse class="orbit" cx="350" cy="130" rx="55" ry="26"/>
-
-        <!-- fixed points -->
-        <circle class="fixed-point" cx="350" cy="130" r="3.4"/>
-        <circle class="fixed-point--unstable" cx="40" cy="130" r="3.6"/>
-        <circle class="fixed-point--unstable" cx="660" cy="130" r="3.6"/>
-
-        <!-- traced trajectory -->
-        <circle class="phase-dot" r="4.5" cx="465" cy="130">
-          <animateMotion dur="9s" repeatCount="indefinite" begin="indefinite" rotate="0">
-            <mpath href="#orbit-mid-path" xlink:href="#orbit-mid-path"/>
-          </animateMotion>
-        </circle>
-      </svg>
-      <p class="caption">fig. — phase portrait of a simple pendulum (q, p), schematic · closed curves: libration · dashed: separatrix · open curves: rotation</p>
-    </div>
+    <figure class="portrait">
+        <img
+        src="../data/me.jpg"
+        alt="Photo of Alex Cason"
+        width="700"
+        height="260"
+        loading="lazy">
+      <figcaption class="caption">Alex Cason · University of Tennessee, Knoxville</figcaption>
+    </figure>
 
     <nav class="tile-row" aria-label="Sections">
       <a class="tile" href="research.html">
