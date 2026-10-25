@@ -1,3 +1,21 @@
+
+function definePhysicsMacros() {
+  if (typeof katex === "undefined") return;
+  try {
+    katex.__defineMacro("\\pdv", "\\frac{\\partial #1}{\\partial #2}");
+    katex.__defineMacro("\\dv", "\\frac{d#1}{d#2}");
+    katex.__defineMacro("\\vu", "\\hat{#1}");
+    katex.__defineMacro("\\vb", "\\mathbf{#1}");
+    katex.__defineMacro("\\abs", "\\left|#1\\right|");
+    katex.__defineMacro("\\norm", "\\left\\|#1\\right\\|");
+    katex.__defineMacro("\\bra", "\\langle #1|");
+    katex.__defineMacro("\\ket", "|#1\\rangle");
+    katex.__defineMacro("\\braket", "\\langle #1\\mid #2\\rangle");
+    katex.__defineMacro("\\comm", "\\left[#1,#2\\right]");
+    katex.__defineMacro("\\acomm", "\\left\\{#1,#2\\right\\}");
+  } catch (e) {}
+}
+
 // ---------------------------------------------------------------------
 // Alex Cason — site behavior
 // Vanilla JS, no build step. Each render* function only runs if its
@@ -296,6 +314,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderVideos();
   renderContact("contact-container");
   renderNotes();
+  definePhysicsMacros();
   renderMath();
   initPhaseDot();
 
