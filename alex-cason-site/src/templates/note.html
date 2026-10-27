@@ -8,6 +8,7 @@
       <h1>{{ title }}</h1>
       <div class="note-meta">
         {% if date %}<span class="mono-label">{{ date }}</span>{% endif %}
+        {% if reading_time %}<span class="mono-label">{{ reading_time }} min read</span>{% endif %}
         {% if tags %}
         <span class="tags">
           {% for t in tags %}<span class="tag">{{ t }}</span>{% endfor %}
@@ -16,9 +17,42 @@
       </div>
     </div>
 
-    <article class="note-body">
+    <nav class="note-toc" id="note-toc" aria-label="Table of contents" hidden>
+      <p class="note-toc__label">On this page</p>
+      <ul id="note-toc-list"></ul>
+    </nav>
+
+    <article class="note-body" id="note-body">
       {{ body_html | safe }}
     </article>
+
+    {% if prev_note or next_note %}
+    <nav class="note-pager" aria-label="Note navigation">
+      {% if prev_note %}
+      <a class="note-pager__link note-pager__link--prev" href="{{ root }}notes/{{ prev_note.slug }}.html">
+        <span class="note-pager__label">← Newer</span>
+        <span class="note-pager__title">{{ prev_note.title }}</span>
+      </a>
+      {% endif %}
+      {% if next_note %}
+      <a class="note-pager__link note-pager__link--next" href="{{ root }}notes/{{ next_note.slug }}.html">
+        <span class="note-pager__label">Older →</span>
+        <span class="note-pager__title">{{ next_note.title }}</span>
+      </a>
+      {% endif %}
+    </nav>
+    {% endif %}
+
+    {% if related_notes %}
+    <section class="related-notes">
+      <h2>Related notes</h2>
+      <ul>
+        {% for r in related_notes %}
+        <li><a href="{{ root }}notes/{{ r.slug }}.html">{{ r.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
 
     <a class="back-to-notes" href="{{ root }}notes.html">← Back to all notes</a>
   </div>

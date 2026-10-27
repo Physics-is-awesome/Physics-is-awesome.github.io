@@ -423,6 +423,17 @@ main{ padding: 3rem 0 5rem; }
   font-size: .72rem;
   color: var(--ink-faint);
 }
+.note-card__meta{
+  display: flex;
+  gap: .9rem;
+  align-items: center;
+  margin-bottom: .3rem;
+}
+.note-reading{
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  color: var(--ink-faint);
+}
 .note-card h3{ font-size: 1.15rem; margin: .3rem 0 .4rem; }
 .note-card h3 a{ text-decoration: none; color: var(--ink); }
 .note-card h3 a:hover{ color: var(--accent); }
@@ -562,10 +573,104 @@ main{ padding: 3rem 0 5rem; }
 /* -------------------------------------------------------------------- */
 /* Responsive                                                            */
 /* -------------------------------------------------------------------- */
+/* -------------------------------------------------------------------- */
+/* Note enhancements: TOC, code copy, navigation                         */
+/* -------------------------------------------------------------------- */
+.note-toc{
+  border: 1px solid var(--paper-line);
+  background: var(--paper-raised);
+  padding: 1rem 1.2rem;
+  margin: 0 0 2rem;
+  font-family: var(--font-ui);
+  font-size: .86rem;
+}
+.note-toc__label{
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--ink-faint);
+  margin-bottom: .5rem;
+}
+.note-toc ul{ list-style: none; padding: 0; margin: 0; }
+.note-toc li{ margin: .25rem 0; }
+.note-toc li.toc-h3{ padding-left: 1rem; }
+.note-toc a{ text-decoration: none; color: var(--ink-soft); }
+.note-toc a:hover{ color: var(--accent); }
+
+.heading-anchor{
+  margin-left: .4rem;
+  font-family: var(--font-mono);
+  font-size: .7em;
+  color: var(--ink-faint);
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity .12s ease;
+}
+h2:hover .heading-anchor, h3:hover .heading-anchor, h4:hover .heading-anchor{ opacity: 1; }
+
+.code-copy{
+  position: absolute;
+  top: .5rem;
+  right: .5rem;
+  font-family: var(--font-ui);
+  font-size: .72rem;
+  padding: .25em .6em;
+  border: 1px solid var(--paper-line);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+.code-copy:hover{ color: var(--ink); border-color: var(--accent); }
+
+.note-pager{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--paper-line);
+}
+.note-pager__link{
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+  text-decoration: none;
+  padding: .8rem;
+  border: 1px solid var(--paper-line);
+  background: var(--paper);
+}
+.note-pager__link:hover{ background: var(--paper-raised); }
+.note-pager__label{
+  font-family: var(--font-ui);
+  font-size: .72rem;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.note-pager__title{
+  font-family: var(--font-display);
+  font-size: .95rem;
+  color: var(--ink);
+}
+.note-pager__link--next{ text-align: right; }
+
+.related-notes{ margin-top: 2.5rem; }
+.related-notes h2{ font-size: 1.15rem; }
+.related-notes ul{ padding-left: 1.2rem; }
+.related-notes a{ text-decoration: none; }
+
+@media print{
+  .site-header, .site-footer, .note-toc, .code-copy, .note-pager, .related-notes, .back-to-notes{ display: none !important; }
+  .note-body{ max-width: none; }
+  pre{ white-space: pre-wrap; }
+}
+
 @media (max-width: 640px){
   body{ font-size: 16px; }
   .site-header .wrap{ flex-direction: column; align-items: flex-start; gap: .8rem; }
   nav.site-nav{ gap: 1rem; }
   main{ padding: 2.2rem 0 3.5rem; }
   .card-grid{ grid-template-columns: 1fr; }
+  .note-pager{ grid-template-columns: 1fr; }
 }

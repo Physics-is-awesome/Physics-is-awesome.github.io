@@ -58,6 +58,14 @@ def escape_html(s: str) -> str:
 # ---------------------------------------------------------------------
 # Markdown notes / pages
 # ---------------------------------------------------------------------
+import re as _re
+
+def reading_time_minutes(html_or_text: str) -> int:
+    text = _re.sub(r"<[^>]+>", " ", html_or_text or "")
+    words = len(text.split())
+    return max(1, round(words / 200))
+
+
 def render_markdown(text: str) -> str:
     return markdown.markdown(
         text,
@@ -71,13 +79,15 @@ def load_markdown_note(path: Path) -> dict:
     slug = slugify_from_path(path)
     meta = post.metadata
     d = meta.get("date", "")
+    body_html = render_markdown(post.content)
     return {
         "slug": slug,
         "title": meta.get("title") or slug.replace("-", " ").title(),
         "date": str(d) if d else "",
         "tags": meta.get("tags", []) or [],
         "summary": meta.get("summary", ""),
-        "body_html": render_markdown(post.content),
+        "body_html": body_html,
+        "reading_time": reading_time_minutes(body_html),
     }
 
 
@@ -136,6 +146,7 @@ def load_tex_note(path: Path) -> dict:
         "tags": tags,
         "summary": summary,
         "body_html": body_out.stdout,
+        "reading_time": reading_time_minutes(body_out.stdout),
     }
 
 
@@ -397,9 +408,14 @@ def render_notes_index_html(notes_index: list) -> str:
         tags_html = "".join(
             f'<span class="tag">{escape_html(t)}</span>' for t in tags
         )
+        reading = n.get("reading_time")
+        reading_html = f'<span class="note-reading">{escape_html(str(reading))} min read</span>' if reading else ""
         cards.append(
             f"""    <article class="note-card">
-      <span class="note-date">{escape_html(date)}</span>
+      <div class="note-card__meta">
+        <span class="note-date">{escape_html(date)}</span>
+        {reading_html}
+      </div>
       <h3><a href="notes/{escape_html(slug)}.html">{escape_html(title)}</a></h3>
       <p>{escape_html(summary)}</p>
       <div class="tags">{tags_html}</div>
@@ -456,19 +472,41 @@ def build_notes(env, out_dir: Path) -> list:
         )
         tex_files = []
 
+    loaded = []
     for path in md_files:
         note = load_markdown_note(path)
-        html = template.render(root="../", active="notes", year=datetime.now().year, **note)
-        (out_dir / f"{note['slug']}.html").write_text(html, encoding="utf-8")
-        index.append(note)
+        loaded.append(note)
         log(f"note (md):  {path.name} -> notes/{note['slug']}.html")
 
     for path in tex_files:
         note = load_tex_note(path)
-        html = template.render(root="../", active="notes", year=datetime.now().year, **note)
+        loaded.append(note)
+        log(f"note (tex): {path.name} -> notes/{note['slug']}.html")
+
+    loaded.sort(key=lambda n: n.get("date", ""), reverse=True)
+
+    for i, note in enumerate(loaded):
+        prev_note = loaded[i - 1] if i > 0 else None
+        next_note = loaded[i + 1] if i + 1 < len(loaded) else None
+        note_tags = set(note.get("tags") or [])
+        related = [
+            {"slug": n["slug"], "title": n["title"]}
+            for n in loaded
+            if n["slug"] != note["slug"]
+            and note_tags
+            and set(n.get("tags") or []) & note_tags
+        ][:4]
+        html = template.render(
+            root="../",
+            active="notes",
+            year=datetime.now().year,
+            prev_note=prev_note,
+            next_note=next_note,
+            related_notes=related,
+            **note,
+        )
         (out_dir / f"{note['slug']}.html").write_text(html, encoding="utf-8")
         index.append(note)
-        log(f"note (tex): {path.name} -> notes/{note['slug']}.html")
 
     index.sort(key=lambda n: n.get("date", ""), reverse=True)
     return index

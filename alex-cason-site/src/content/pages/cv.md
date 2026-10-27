@@ -13,3 +13,7 @@ To publish a CV:
   2. Replace the placeholder line above with:
      [Download CV (PDF) →](assets/cv/alex-cason-cv.pdf)
 -->
+[Download CV (PDF) →](assets/img/Cv.pdf)
+
+[Download Resume (PDF) →](assets/img/Resume.pdf)
+

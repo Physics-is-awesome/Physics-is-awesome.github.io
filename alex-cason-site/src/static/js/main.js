@@ -334,6 +334,55 @@ function initPhaseDot() {
   });
 }
 
+function enhanceNote() {
+  const body = document.getElementById("note-body");
+  if (!body) return;
+
+  const headings = body.querySelectorAll("h2, h3, h4");
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = "section-" + (i + 1);
+    if (!h.querySelector(".heading-anchor")) {
+      const a = document.createElement("a");
+      a.className = "heading-anchor";
+      a.href = "#" + h.id;
+      a.textContent = "#";
+      a.setAttribute("aria-label", "Link to this section");
+      h.appendChild(a);
+    }
+  });
+
+  const toc = document.getElementById("note-toc");
+  const list = document.getElementById("note-toc-list");
+  if (toc && list && headings.length >= 3) {
+    toc.hidden = false;
+    list.innerHTML = Array.from(headings)
+      .map(
+        (h) =>
+          `<li class="toc-${h.tagName.toLowerCase()}"><a href="#${h.id}">${escapeHtml(
+            h.textContent.replace("#", "").trim()
+          )}</a></li>`
+      )
+      .join("");
+  }
+
+  body.querySelectorAll("pre").forEach((pre) => {
+    if (pre.querySelector(".code-copy")) return;
+    const btn = document.createElement("button");
+    btn.className = "code-copy";
+    btn.type = "button";
+    btn.textContent = "Copy";
+    btn.addEventListener("click", () => {
+      const code = pre.querySelector("code") || pre;
+      navigator.clipboard.writeText(code.textContent).then(() => {
+        btn.textContent = "Copied";
+        setTimeout(() => (btn.textContent = "Copy"), 1500);
+      });
+    });
+    pre.style.position = "relative";
+    pre.appendChild(btn);
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   renderProjects();
   renderVideos();
@@ -342,6 +391,7 @@ document.addEventListener("DOMContentLoaded", () => {
   definePhysicsMacros();
   renderMath();
   initPhaseDot();
+  enhanceNote();
 
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
