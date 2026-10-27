@@ -95,6 +95,7 @@
 - section: YouTube
   title: "Lie Operator Splitting: One of the Ten Pillars"
   status: active
+  era: past
   tagline: "Introduction to Lie operator splitting in numerical methods"
   description: "A look at Lie operator splitting, framed as one of 'ten pillars.'"
   tags: [Operator Splitting, Numerical Methods, YouTube]
