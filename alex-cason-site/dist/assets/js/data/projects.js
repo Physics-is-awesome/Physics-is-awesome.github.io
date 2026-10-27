@@ -32,7 +32,7 @@ const PROJECTS = [
   {
     "section": "Open Source Code",
     "title": "GeometricIntegrators.jl \u2014 Hamiltonian-(finish)",
-    "status": "Initial planning",
+    "status": "planned",
     "tagline": "Devloping Geometric numerical integrator",
     "description": "(finish later)",
     "tags": [
@@ -47,7 +47,7 @@ const PROJECTS = [
   {
     "section": "Open Source Code",
     "title": "PlasmaPy \u2014 GEMPIC",
-    "status": "Initial planning",
+    "status": "planned",
     "tagline": "Devloping Geometric Electromagnetic Particle in Cell",
     "description": "(finish later)",
     "tags": [

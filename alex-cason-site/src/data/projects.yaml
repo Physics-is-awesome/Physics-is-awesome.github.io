@@ -7,7 +7,10 @@
 # Fields:
 #   title        (required)
 #   status       active | progress | planned
-#   section      optional grouping key
+#   section      optional grouping key (Research, Open Source Code, Personal Projects, YouTube)
+#   era          optional: "now" (default) or "past" — controls whether the project
+#                appears under the "Now" or "Past" heading on the Projects page.
+#                A completed/done status is also treated as "past".
 #   tagline      one line, shown in italics under the title
 #   description  a longer paragraph
 #   tags         a list of short topic tags
@@ -38,7 +41,7 @@
 
 - section: Open Source Code
   title: GeometricIntegrators.jl — Hamiltonian-(finish)
-  status: Initial planning
+  status: planned
   tagline: "Devloping Geometric numerical integrator"
   description: "(finish later)"
   tags: [Julia, Geometric Integration, numerics, Open Source]
@@ -47,7 +50,7 @@
 
 - section: Open Source Code
   title: PlasmaPy — GEMPIC
-  status: Initial planning
+  status: planned
   tagline: "Devloping Geometric Electromagnetic Particle in Cell"
   description: "(finish later)"
   tags: [python, plasma, Geometric Integration, numerics, Open Source]

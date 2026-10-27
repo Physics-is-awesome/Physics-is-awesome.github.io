@@ -164,107 +164,38 @@ def load_social_links() -> dict:
 # HTML rendering (server-side)
 # ---------------------------------------------------------------------
 def status_label(status: str) -> str:
-    return {"active": "Active", "progress": "In progress", "planned": "Planned"}.get(
-        status or "", status or ""
-    )
+    return {
+        "active": "Active",
+        "progress": "In progress",
+        "planned": "Planned",
+        "completed": "Completed",
+        "done": "Done",
+    }.get(status or "", status or "")
+
+
+def project_era(p: dict) -> str:
+    """Whether a project belongs to the 'Now' or 'Past' group."""
+    era = (p.get("era") or p.get("period") or "").strip().lower()
+    if era in {"past", "completed", "done", "finished", "former", "archived"}:
+        return "Past"
+    if era in {"now", "current", "present", "active", "ongoing"}:
+        return "Now"
+    status = (p.get("status") or "").strip().lower()
+    if status in {"completed", "done", "finished", "past", "archived"}:
+        return "Past"
+    return "Now"
 
 
 def render_projects_html(projects: list) -> str:
     if not projects:
         return ""
 
-    sections_order = ["YouTube", "Personal Projects", "Research", "Open Source Code"]
+    sections_order = ["Research", "Open Source Code", "Personal Projects", "YouTube"]
     projects = projects if isinstance(projects, list) else []
 
     has_sections = any(p and (p.get("section") or p.get("category")) for p in projects)
-    if has_sections:
-        grouped = {s: [] for s in sections_order}
-        for p in projects:
-            if not isinstance(p, dict):
-                continue
-            key = p.get("section") or p.get("category") or sections_order[0]
-            if key not in grouped:
-                grouped[key] = []
-            grouped[key].append(p)
 
-        parts = []
-        for s in sections_order:
-            items = grouped.get(s) or []
-            if not items:
-                continue
-            cards = []
-            for p in items:
-                links = []
-                if p.get("github"):
-                    label = p.get("linkLabel") or "Repository"
-                    links.append(
-                        f'<a href="{escape_html(p["github"])}">{escape_html(label)} →</a>'
-                    )
-                if p.get("paper"):
-                    links.append(
-                        f'<a href="{escape_html(p["paper"])}">Paper / docs →</a>'
-                    )
-                if p.get("notesLink"):
-                    links.append(
-                        f'<a href="{escape_html(p["notesLink"])}">Related notes →</a>'
-                    )
-                if links:
-                    links_html = '<div class="card-links">' + "".join(links) + "</div>"
-                else:
-                    if p.get("status") == "planned":
-                        note = "Not yet started publicly"
-                    else:
-                        note = "Repository forthcoming"
-                    links_html = f'<div class="card-note">{escape_html(note)}</div>'
-
-                status_html = ""
-                if p.get("status"):
-                    status_html = f'<span class="status status--{escape_html(p["status"])}">{escape_html(status_label(p["status"]))}</span>'
-
-                tagline_html = ""
-                if p.get("tagline"):
-                    tagline_html = f"<p><em>{escape_html(p['tagline'])}</em></p>"
-
-                desc_html = f"<p>{escape_html(p.get('description') or '')}</p>"
-
-                tags_html = ""
-                tags = p.get("tags") or []
-                if isinstance(tags, list) and tags:
-                    tag_spans = "".join(
-                        f'<span class="tag">{escape_html(t)}</span>' for t in tags
-                    )
-                    tags_html = f'<div class="tags">{tag_spans}</div>'
-
-                cards.append(
-                    f"""              <article class="card">
-                <div class="card-top">
-                  <h3>{escape_html(p.get('title') or '')}</h3>
-                  {status_html}
-                </div>
-                {tagline_html}
-                {desc_html}
-                {tags_html}
-                {links_html}
-              </article>"""
-                )
-
-            parts.append(
-                f"""          <section class="project-section">
-            <header class="project-section__header">
-              <h2>{escape_html(s)}</h2>
-            </header>
-            <div class="card-grid">
-{chr(10).join(cards)}
-            </div>
-          </section>"""
-            )
-        return "\n".join(parts)
-
-    # No sections grouping
-    cards = []
-    for p in projects:
-        if not isinstance(p, dict):
-            continue
+    def card_html(p: dict) -> str:
         links = []
         if p.get("github"):
             label = p.get("linkLabel") or "Repository"
@@ -306,19 +237,85 @@ def render_projects_html(projects: list) -> str:
             )
             tags_html = f'<div class="tags">{tag_spans}</div>'
 
-        cards.append(
-            f"""        <article class="card">
-          <div class="card-top">
-            <h3>{escape_html(p.get('title') or '')}</h3>
-            {status_html}
-          </div>
-          {tagline_html}
-          {desc_html}
-          {tags_html}
-          {links_html}
-        </article>"""
-        )
-    return '<div class="card-grid">\n' + "\n".join(cards) + "\n      </div>"
+        return f"""              <article class="card">
+                <div class="card-top">
+                  <h3>{escape_html(p.get('title') or '')}</h3>
+                  {status_html}
+                </div>
+                {tagline_html}
+                {desc_html}
+                {tags_html}
+                {links_html}
+              </article>"""
+
+    def category_block(title: str, items: list) -> str:
+        cards = [card_html(p) for p in items if isinstance(p, dict)]
+        return f"""          <section class="project-section">
+            <header class="project-section__header">
+              <h2>{escape_html(title)}</h2>
+            </header>
+            <div class="card-grid">
+{chr(10).join(cards)}
+            </div>
+          </section>"""
+
+    eras = {"Now": {s: [] for s in sections_order}, "Past": {s: [] for s in sections_order}}
+    uncategorized = {"Now": [], "Past": []}
+
+    if has_sections:
+        for p in projects:
+            if not isinstance(p, dict):
+                continue
+            era = project_era(p)
+            key = p.get("section") or p.get("category") or sections_order[0]
+            if key not in sections_order:
+                if key not in eras[era]:
+                    eras[era][key] = []
+                eras[era][key].append(p)
+            else:
+                eras[era][key].append(p)
+    else:
+        for p in projects:
+            if not isinstance(p, dict):
+                continue
+            uncategorized[project_era(p)].append(p)
+
+    era_blocks = []
+    for era in ("Now", "Past"):
+        if has_sections:
+            cat_blocks = []
+            for s in sections_order:
+                items = eras[era].get(s) or []
+                if items:
+                    cat_blocks.append(category_block(s, items))
+            # any extra sections
+            for key, items in eras[era].items():
+                if key in sections_order or not items:
+                    continue
+                cat_blocks.append(category_block(key, items))
+            if not cat_blocks:
+                continue
+            era_blocks.append(
+                f"""      <section class="projects-era">
+        <h2 class="projects-era__title">{era}</h2>
+{chr(10).join(cat_blocks)}
+      </section>"""
+            )
+        else:
+            items = uncategorized[era]
+            if not items:
+                continue
+            cards = [card_html(p) for p in items]
+            era_blocks.append(
+                f"""      <section class="projects-era">
+        <h2 class="projects-era__title">{era}</h2>
+        <div class="card-grid">
+{chr(10).join(cards)}
+        </div>
+      </section>"""
+            )
+
+    return "\n".join(era_blocks)
 
 
 def placeholder_thumb_svg(title: str) -> str:

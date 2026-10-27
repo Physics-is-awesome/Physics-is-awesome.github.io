@@ -527,6 +527,14 @@ main{ padding: 3rem 0 5rem; }
 /* -------------------------------------------------------------------- */
 /* Project sections                                                     */
 /* -------------------------------------------------------------------- */
+.projects-era{ margin-bottom: 3.5rem; }
+.projects-era:last-child{ margin-bottom: 0; }
+.projects-era__title{
+  font-size: 1.7rem;
+  margin-bottom: 1.6rem;
+  padding-bottom: .6rem;
+  border-bottom: 2px solid var(--paper-line);
+}
 .project-section{ margin-top: 3rem; }
 .project-section:first-of-type{ margin-top: 0; }
 .project-section__header{ margin-bottom: 1.2rem; }

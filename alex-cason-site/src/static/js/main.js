@@ -34,98 +34,123 @@ function statusLabel(status) {
 }
 
 // -- Projects -----------------------------------------------------------
+function projectEra(p) {
+  const era = String(p.era || p.period || "").trim().toLowerCase();
+  if (["past", "completed", "done", "finished", "former", "archived"].includes(era)) return "Past";
+  if (["now", "current", "present", "active", "ongoing"].includes(era)) return "Now";
+  const status = String(p.status || "").trim().toLowerCase();
+  if (["completed", "done", "finished", "past", "archived"].includes(status)) return "Past";
+  return "Now";
+}
+
 function renderProjects() {
   const el = document.getElementById("project-grid");
   if (!el || typeof PROJECTS === "undefined") return;
 
   const emptyEl = document.getElementById("project-empty");
-  if (!PROJECTS.length) {
+  const projects = Array.isArray(PROJECTS) ? PROJECTS : [];
+  if (!projects.length) {
     el.innerHTML = "";
     if (emptyEl) emptyEl.classList.add("is-visible");
     return;
   }
   if (emptyEl) emptyEl.classList.remove("is-visible");
 
-  const sections = ["YouTube", "Personal Projects", "Research", "Open Source Code"];
-  const projects = Array.isArray(PROJECTS) ? PROJECTS : [];
+  const sections = ["Research", "Open Source Code", "Personal Projects", "YouTube"];
 
-  const hasSections = projects.some((p) => p && p.section);
-  if (hasSections) {
-    const grouped = {};
-    for (const s of sections) grouped[s] = [];
-    for (const p of projects) {
+  function cardHtml(p) {
+    const links = [];
+    if (p.github) links.push(`<a href="${p.github}">${p.linkLabel || "Repository"} →</a>`);
+    if (p.paper) links.push(`<a href="${p.paper}">Paper / docs →</a>`);
+    if (p.notesLink) links.push(`<a href="${p.notesLink}">Related notes →</a>`);
+    const linksHtml = links.length
+      ? `<div class="card-links">${links.join("")}</div>`
+      : `<div class="card-note">${p.status === "planned" ? "Not yet started publicly" : "Repository forthcoming"}</div>`;
+
+    return `
+      <article class="card">
+        <div class="card-top">
+          <h3>${escapeHtml(p.title || "")}</h3>
+          ${p.status ? `<span class="status status--${p.status}">${statusLabel(p.status)}</span>` : ""}
+        </div>
+        ${p.tagline ? `<p><em>${escapeHtml(p.tagline)}</em></p>` : ""}
+        <p>${escapeHtml(p.description || "")}</p>
+        ${Array.isArray(p.tags) && p.tags.length ? `<div class="tags">${p.tags.map((t) => `<span class="tag">${escapeHtml(t)}</span>`).join("")}</div>` : ""}
+        ${linksHtml}
+      </article>
+    `;
+  }
+
+  const hasSections = projects.some((p) => p && (p.section || p.category));
+
+  const eras = { Now: {}, Past: {} };
+  for (const s of sections) { eras.Now[s] = []; eras.Past[s] = []; }
+  const uncategorized = { Now: [], Past: [] };
+
+  for (const p of projects) {
+    if (!p || typeof p !== "object") continue;
+    const era = projectEra(p);
+    if (hasSections) {
       const key = p.section || p.category || sections[0];
-      if (!grouped[key]) grouped[key] = [];
-      grouped[key].push(p);
+      if (!eras[era][key]) eras[era][key] = [];
+      eras[era][key].push(p);
+    } else {
+      uncategorized[era].push(p);
     }
+  }
 
-    el.innerHTML = sections
-      .map((s) => {
-        const items = grouped[s] || [];
-        if (!items.length) return "";
-        const cards = items
-          .map((p) => {
-            const links = [];
-            if (p.github) links.push(`<a href="${p.github}">${p.linkLabel || "Repository"} →</a>`);
-            if (p.paper) links.push(`<a href="${p.paper}">Paper / docs →</a>`);
-            if (p.notesLink) links.push(`<a href="${p.notesLink}">Related notes →</a>`);
-            const linksHtml = links.length
-              ? `<div class="card-links">${links.join("")}</div>`
-              : `<div class="card-note">${p.status === "planned" ? "Not yet started publicly" : "Repository forthcoming"}</div>`;
-
-            return `
-              <article class="card">
-                <div class="card-top">
-                  <h3>${escapeHtml(p.title || "")}</h3>
-                  ${p.status ? `<span class="status status--${p.status}">${statusLabel(p.status)}</span>` : ""}
-                </div>
-                ${p.tagline ? `<p><em>${escapeHtml(p.tagline)}</em></p>` : ""}
-                <p>${escapeHtml(p.description || "")}</p>
-                ${Array.isArray(p.tags) && p.tags.length ? `<div class="tags">${p.tags.map((t) => `<span class="tag">${escapeHtml(t)}</span>`).join("")}</div>` : ""}
-                ${linksHtml}
-              </article>
-            `;
-          })
-          .join("");
-        return `
+  const blocks = [];
+  for (const era of ["Now", "Past"]) {
+    if (hasSections) {
+      const catBlocks = [];
+      for (const s of sections) {
+        const items = eras[era][s] || [];
+        if (!items.length) continue;
+        const cards = items.map(cardHtml).join("");
+        catBlocks.push(`
           <section class="project-section">
             <header class="project-section__header">
               <h2>${escapeHtml(s)}</h2>
             </header>
             <div class="card-grid">${cards}</div>
           </section>
-        `;
-      })
-      .join("");
-
-    if (emptyEl) emptyEl.classList.remove("is-visible");
-    return;
+        `);
+      }
+      for (const key of Object.keys(eras[era])) {
+        if (sections.includes(key)) continue;
+        const items = eras[era][key] || [];
+        if (!items.length) continue;
+        const cards = items.map(cardHtml).join("");
+        catBlocks.push(`
+          <section class="project-section">
+            <header class="project-section__header">
+              <h2>${escapeHtml(key)}</h2>
+            </header>
+            <div class="card-grid">${cards}</div>
+          </section>
+        `);
+      }
+      if (!catBlocks.length) continue;
+      blocks.push(`
+        <section class="projects-era">
+          <h2 class="projects-era__title">${era}</h2>
+          ${catBlocks.join("")}
+        </section>
+      `);
+    } else {
+      const items = uncategorized[era];
+      if (!items.length) continue;
+      const cards = items.map(cardHtml).join("");
+      blocks.push(`
+        <section class="projects-era">
+          <h2 class="projects-era__title">${era}</h2>
+          <div class="card-grid">${cards}</div>
+        </section>
+      `);
+    }
   }
 
-  el.innerHTML = projects
-    .map((p) => {
-      const links = [];
-      if (p.github) links.push(`<a href="${p.github}">${p.linkLabel || "Repository"} →</a>`);
-      if (p.paper) links.push(`<a href="${p.paper}">Paper / docs →</a>`);
-      if (p.notesLink) links.push(`<a href="${p.notesLink}">Related notes →</a>`);
-      const linksHtml = links.length
-        ? `<div class="card-links">${links.join("")}</div>`
-        : `<div class="card-note">${p.status === "planned" ? "Not yet started publicly" : "Repository forthcoming"}</div>`;
-
-      return `
-        <article class="card">
-          <div class="card-top">
-            <h3>${escapeHtml(p.title || "")}</h3>
-            ${p.status ? `<span class="status status--${p.status}">${statusLabel(p.status)}</span>` : ""}
-          </div>
-          ${p.tagline ? `<p><em>${escapeHtml(p.tagline)}</em></p>` : ""}
-          <p>${escapeHtml(p.description || "")}</p>
-          ${Array.isArray(p.tags) && p.tags.length ? `<div class="tags">${p.tags.map((t) => `<span class="tag">${escapeHtml(t)}</span>`).join("")}</div>` : ""}
-          ${linksHtml}
-        </article>
-      `;
-    })
-    .join("");
+  el.innerHTML = blocks.join("");
 }
 
 // -- Videos ---------------------------------------------------------------
