@@ -29,6 +29,7 @@
   tags: [Gravitational Waves, Core-Collapse Supernovae, GW Memory, Next-Generation Detectors]
   github: ""
   paper: ""
+  linkLabel: "Paper"
 
 - section: Open Source Code
   title: GeometricIntegrators.jl — Developer Documentation
