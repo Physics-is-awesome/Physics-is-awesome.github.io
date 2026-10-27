@@ -32,7 +32,7 @@
   linkLabel: "Paper"
 
 - section: Open Source Code
-  title: GeometricIntegrators.jl — Developer Documentation
+  title: GeometricIntegrators.jl: Developer Documentation
   status: progress
   tagline: "Improving docs for geometric numerical integration in Julia"
   description: "Contribution to the developer documentation of GeometricIntegrators.jl, an open-source Julia library for geometric numerical integration, with a focus on improving documentation structure, navigation, and developer guidance."
@@ -41,7 +41,7 @@
   paper: ""
 
 - section: Open Source Code
-  title: GeometricIntegrators.jl — Hamiltonian-(finish)
+  title: GeometricIntegrators.jl: Hamiltonian-(finish)
   status: planned
   tagline: "Devloping Geometric numerical integrator"
   description: "(finish later)"
@@ -50,7 +50,7 @@
   paper:
 
 - section: Open Source Code
-  title: PlasmaPy: GEMPIC
+  title: "PlasmaPy: GEMPIC"
   status: planned
   tagline: "Devloping Geometric Electromagnetic Particle in Cell"
   description: "(finish later)"

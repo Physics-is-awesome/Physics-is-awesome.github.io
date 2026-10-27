@@ -12,7 +12,8 @@ const PROJECTS = [
       "Next-Generation Detectors"
     ],
     "github": "",
-    "paper": ""
+    "paper": "",
+    "linkLabel": "Paper"
   },
   {
     "section": "Open Source Code",
@@ -46,7 +47,7 @@ const PROJECTS = [
   },
   {
     "section": "Open Source Code",
-    "title": "PlasmaPy \u2014 GEMPIC",
+    "title": "PlasmaPy: GEMPIC",
     "status": "planned",
     "tagline": "Devloping Geometric Electromagnetic Particle in Cell",
     "description": "(finish later)",
@@ -62,8 +63,25 @@ const PROJECTS = [
   },
   {
     "section": "YouTube",
+    "title": "From Hamiltonian to Boltzmann to Navier-Stokes",
+    "status": "progress",
+    "era": "now",
+    "tagline": "Deriving NS from Boltzmann and Boltzmann from Hamiltonian equations",
+    "description": "Taking a formal derivation and plan through particle interactions, kinetic theory, and continuum fluid dynamics.",
+    "tags": [
+      "Kinetic Theory",
+      "Hamiltonian Mechanics",
+      "plasma physics"
+    ],
+    "github": "",
+    "paper": "",
+    "linkLabel": null
+  },
+  {
+    "section": "YouTube",
     "title": "Metriplectic series 1: Why Ordinary Hamiltonians are non-dissipative",
     "status": "active",
+    "era": "past",
     "tagline": "Hamiltonian (symplectic) systems cannot describe dissipation",
     "description": "First in a series on metriplectic dynamics, starting from why ordinary Hamiltonian systems cannot describe dissipation in order to motivate the metriplectic system.",
     "tags": [
@@ -79,23 +97,9 @@ const PROJECTS = [
   },
   {
     "section": "YouTube",
-    "title": "What is Velocity really? (joke video)",
-    "status": "active",
-    "tagline": "An obtuse mathematical abstraction",
-    "description": "A joke video asking what velocity really is, using obtuse mathematical abstraction.",
-    "tags": [
-      "Joke",
-      "Mathematics",
-      "YouTube"
-    ],
-    "github": "",
-    "paper": "https://www.youtube.com/watch?v=K4NQshgqGrM",
-    "linkLabel": "Watch on YouTube"
-  },
-  {
-    "section": "YouTube",
     "title": "Introduction to Discontinuous Galerkin through Toy Core Collapse Supernova",
     "status": "active",
+    "era": "past",
     "tagline": "DG methods applied to a toy self-gravitating fluid",
     "description": "An introduction to discontinuous Galerkin methods, using a toy model of a self-gravitating fluid. Expanding even more by conserving energy as well as positivity.",
     "tags": [
@@ -127,6 +131,7 @@ const PROJECTS = [
     "section": "YouTube",
     "title": "Building Hyper Efficient Solar System Model: WHCKL",
     "status": "active",
+    "era": "past",
     "tagline": "Long-time integration of a reduced solar system",
     "description": "Building a highly efficient solar system model using WHCKL. Able to simulate a reduced solar system for two billion years.",
     "tags": [
@@ -143,6 +148,7 @@ const PROJECTS = [
     "section": "YouTube",
     "title": "What if you exert a Planck Force onto the Earth?",
     "status": "active",
+    "era": "past",
     "tagline": "TOV + Einstein Toolkit thought experiment",
     "description": "Simulating a Planck force onto a TOV simulation of the Earth, or a close enough approximation, using the Einstein Toolkit. Then, trying to abstract out to see if one could destroy a universe.",
     "tags": [
@@ -159,6 +165,7 @@ const PROJECTS = [
     "section": "YouTube",
     "title": "Variational Integrators for Reduced Magnetohydrodynamics",
     "status": "active",
+    "era": "past",
     "tagline": "Structure-preserving integrators for RMHD",
     "description": "Deriving variational integrators applied to reduced magnetohydrodynamics.",
     "tags": [
@@ -175,6 +182,7 @@ const PROJECTS = [
     "section": "YouTube",
     "title": "Introduction to Symplectic integrators",
     "status": "active",
+    "era": "past",
     "tagline": "Foundations of symplectic integration",
     "description": "An introduction to symplectic integrators.",
     "tags": [

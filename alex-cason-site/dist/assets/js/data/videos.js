@@ -2,18 +2,18 @@ const CHANNEL_URL = "https://www.youtube.com/@Eudaimonia_society";
 
 const VIDEOS = [
   {
-    "title": "Metriplectic series 1: Why Ordinary Hamiltonians are non-dissipative",
-    "description": "First in a series on metriplectic dynamics, starting from why ordinary Hamiltonian systems(Symplectic) cannot describe dissipation in order to motivate the metriplectic system..\n",
-    "url": "https://www.youtube.com/watch?v=WF8mm-Z2oQM",
-    "thumbnail": "https://i.ytimg.com/vi/WF8mm-Z2oQM/hqdefault.jpg",
+    "title": "Building General Relativitic Numerical code",
+    "description": "First in a series on BSSN, starting with developing simulation for short-term evolution of Kerr black holes\n",
+    "url": "https://www.youtube.com/watch?v=nc8zMyGHiFk",
+    "thumbnail": "https://i.ytimg.com/vi/nc8zMyGHiFk/hq720.jpg",
     "date": "~2026-10-12"
   },
   {
-    "title": "What is Velocity really? (joke video)",
-    "description": "A joke video asking what velocity really is. Using obtuse mathematical abstraction.\n",
-    "url": "https://www.youtube.com/watch?v=K4NQshgqGrM",
-    "thumbnail": "https://i.ytimg.com/vi/K4NQshgqGrM/hqdefault.jpg",
-    "date": "~2026-10-03"
+    "title": "Metriplectic series 1: Why Ordinary Hamiltonians are non-dissipative",
+    "description": "First in a series on metriplectic dynamics, starting from why ordinary Hamiltonian systems(Symplectic) cannot describe dissipation in order to motivate the metriplectic system.\n",
+    "url": "https://www.youtube.com/watch?v=WF8mm-Z2oQM",
+    "thumbnail": "https://i.ytimg.com/vi/WF8mm-Z2oQM/hqdefault.jpg",
+    "date": "~2026-10-12"
   },
   {
     "title": "Introduction to Discontinuous Galerkin through Toy Core Collapse Supernova",
