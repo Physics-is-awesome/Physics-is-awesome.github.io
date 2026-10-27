@@ -13,6 +13,10 @@ function definePhysicsMacros() {
     katex.__defineMacro("\\braket", "\\langle #1\\mid #2\\rangle");
     katex.__defineMacro("\\comm", "\\left[#1,#2\\right]");
     katex.__defineMacro("\\acomm", "\\left\\{#1,#2\\right\\}");
+    katex.__defineMacro("\\grad", "\\nabla");
+    katex.__defineMacro("\\div", "\\nabla\\cdot");
+    katex.__defineMacro("\\curl", "\\nabla\\times");
+    katex.__defineMacro("\\pb", "\\left\\{#1,#2\\right\\}");
   } catch (e) {}
 }
 
