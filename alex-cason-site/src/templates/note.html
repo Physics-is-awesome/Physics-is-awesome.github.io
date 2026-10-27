@@ -7,13 +7,7 @@
       <p class="breadcrumb"><a href="{{ root }}notes.html">← Notes</a></p>
       <h1>{{ title }}</h1>
       <div class="note-meta">
-        {% if date %}<span class="mono-label">{{ date }}</span>{% endif %}
         {% if reading_time %}<span class="mono-label">{{ reading_time }} min read</span>{% endif %}
-        {% if tags %}
-        <span class="tags">
-          {% for t in tags %}<span class="tag">{{ t }}</span>{% endfor %}
-        </span>
-        {% endif %}
       </div>
     </div>
 

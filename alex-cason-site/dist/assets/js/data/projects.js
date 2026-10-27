@@ -17,7 +17,7 @@ const PROJECTS = [
   },
   {
     "section": "Open Source Code",
-    "title": "GeometricIntegrators.jl \u2014 Developer Documentation",
+    "title": "GeometricIntegrators.jl - Developer Documentation",
     "status": "progress",
     "tagline": "Improving docs for geometric numerical integration in Julia",
     "description": "Contribution to the developer documentation of GeometricIntegrators.jl, an open-source Julia library for geometric numerical integration, with a focus on improving documentation structure, navigation, and developer guidance.",
@@ -32,7 +32,7 @@ const PROJECTS = [
   },
   {
     "section": "Open Source Code",
-    "title": "GeometricIntegrators.jl \u2014 Hamiltonian-(finish)",
+    "title": "GeometricIntegrators.jl - Hamiltonian-(finish)",
     "status": "planned",
     "tagline": "Devloping Geometric numerical integrator",
     "description": "(finish later)",

@@ -413,12 +413,10 @@ def render_notes_index_html(notes_index: list) -> str:
         cards.append(
             f"""    <article class="note-card">
       <div class="note-card__meta">
-        <span class="note-date">{escape_html(date)}</span>
         {reading_html}
       </div>
       <h3><a href="notes/{escape_html(slug)}.html">{escape_html(title)}</a></h3>
       <p>{escape_html(summary)}</p>
-      <div class="tags">{tags_html}</div>
     </article>"""
         )
     return "\n".join(cards)

@@ -13,13 +13,6 @@
       </p>
     </div>
 
-    <div class="notes-controls">
-      <div class="search-box">
-        <input type="search" id="notes-search" placeholder="Search notes…" aria-label="Search notes">
-      </div>
-      <div id="tag-filters" class="tag-filters" aria-label="Filter by tag"></div>
-    </div>
-
     {% if notes_list_html %}
     <div id="notes-list">
 {{ notes_list_html | safe }}
