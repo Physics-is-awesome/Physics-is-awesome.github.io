@@ -41,19 +41,10 @@
   paper: ""
 
 - section: Open Source Code
-  title: GeometricIntegrators.jl - Hamiltonian-(finish)
-  status: planned
-  tagline: "Devloping Geometric numerical integrator"
-  description: "(finish later)"
-  tags: [Julia, Geometric Integration, numerics, Open Source]
-  github: ""
-  paper:
-
-- section: Open Source Code
   title: "PlasmaPy: GEMPIC"
   status: planned
   tagline: "Devloping Geometric Electromagnetic Particle in Cell"
-  description: "(finish later)"
+  description: "Working to build GEMPIC numerical simulation inside of PlasmaPY ecosystem"
   tags: [python, plasma, Geometric Integration, numerics, Open Source]
   github: ""
   paper:

@@ -133,4 +133,75 @@ If we assume $N \gets s$, then we can rewrite as
 
   Vlasov equation results in the a well defined limit, that can be caused by plasma comprised of electrons in a neutralizing, fixed, positive background.
 
+
 \subsection{Diagrams: Prigogine Analysis}
+Ilya Prigogine's work on nonequilibrium thermodynamics
+investigates how irreversible processes generate entropy
+and how systems maintained away from thermodynamic
+equilibrium can develop organized structures.
+
+The central concepts include:
+\begin{itemize}
+    \item Entropy production and irreversible processes.
+    \item Thermodynamic equilibrium versus nonequilibrium.
+    \item Linear irreversible thermodynamics.
+    \item Minimum entropy production under restricted conditions.
+    \item Instabilities and dissipative structures.
+    \item The emergence of macroscopic organization from
+          microscopic dynamics.
+\end{itemize}
+
+A key distinction is between a system's total entropy
+and its internal entropy production. An open system can
+maintain or develop organization while exporting entropy
+to its environment.
+
+A typical workflow
+\begin{enumerate}
+    \item Define the system, its boundaries, and its
+          exchanges of matter and energy.
+    \item Identify state variables and conserved quantities.
+    \item Derive the entropy balance and identify the
+          internal entropy production.
+    \item Specify thermodynamic forces and fluxes.
+    \item Establish constitutive relations and check
+          thermodynamic consistency.
+    \item Determine stationary solutions under the
+          imposed boundary conditions.
+    \item Analyze stability as control parameters vary.
+    \item Identify possible bifurcations, patterns,
+          oscillations, or other nonequilibrium states.
+    \item Determine whether the system lies within the
+          regime of validity of linear irreversible
+          thermodynamics.
+\end{enumerate}
+
+
+The central insight is that irreversible dynamics need
+not produce only featureless relaxation. Under suitable
+conditions, sustained energy or matter fluxes can support
+organized nonequilibrium states. Their existence and
+stability must be established from the governing
+dynamics rather than inferred from entropy production
+alone.
+
+\subsection{Bogoliubov Hypothesis}
+
+For context: In the interval $\tau_1$, two molecules are in each others interaction domain. The interval $\tau_2$ is the mean-free-collision times, which is the mean times between collisions. The time $tau_3$ is the average time taken for a molecule to traverse the container in which the gas is confined.
+
+This section for the most part finds the thermodynamic limit and fluid limit.
+
+They also derive the Boltzmann equation.
+
+So these Bogoliubov and Prigogin techniques give us the ability to create kinetic equations at higher configurations.
+
+\subsection{Klimontovich Picture}
+
+In this section we turn to an alternative description of kinetic theory formulated by Klimontovich. In this formalism, phase densities are introduced, moments of which are found to be related to multiparticle distribution functions introduced earlier. Moments of deviations from the mean of these phase densities are similarly found to be related to previously encountered correlation functions. Applying these algorithms to an equation of motion for the first moment of the phase densities is found the first equation of the hierarchy.
+
+\subsection{Grad's Analysis}
+
+Starting with Liouville equation written in this form
+\[
+\pdv{f_N}{t} + \sum^N \pdv{}{x_i} \cdot (v_i f_N) + \frac{1}{m} \sum^N G_i \cdot \pdv{f_N}{v_i} = 0
+  \]
